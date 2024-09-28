@@ -1,8 +1,7 @@
 package ee.pw.hackyeah.hackyeahbackend.unit.application.out;
 
-import lombok.Builder;
-
 import java.util.List;
+import lombok.Builder;
 
 @Builder
 public record UnitOutDTO(List<SingleUnit> units) {

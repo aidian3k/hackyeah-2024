@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.PositiveOrZero;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -41,7 +42,6 @@ public class LearningResource {
 
     private String title;
     private String description;
-
 
     @OneToMany(
         fetch = FetchType.LAZY,
@@ -72,6 +72,9 @@ public class LearningResource {
     @ToString.Exclude
     @Builder.Default
     private Set<Review> reviews = new HashSet<>();
+
+    @PositiveOrZero
+    private Long numberOfDownloads;
 
     @CreationTimestamp
     private LocalDateTime creationDate;

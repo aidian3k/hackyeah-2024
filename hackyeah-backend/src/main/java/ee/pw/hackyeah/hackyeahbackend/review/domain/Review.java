@@ -14,6 +14,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -21,6 +22,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "reviews")
@@ -41,7 +43,7 @@ public class Review {
     @Min(0)
     @Max(5)
     @Column(name = "review_grade")
-    private Long reviewGrade;
+    private Long rating;
 
     @NotNull @Column(name = "comment", length = 1024)
     private String comment;
@@ -57,4 +59,7 @@ public class Review {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private LearningResource learningResource;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 }

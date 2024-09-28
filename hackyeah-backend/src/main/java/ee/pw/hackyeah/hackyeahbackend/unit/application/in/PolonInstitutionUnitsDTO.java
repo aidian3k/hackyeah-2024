@@ -1,9 +1,8 @@
 package ee.pw.hackyeah.hackyeahbackend.unit.application.in;
 
+import java.util.List;
 import lombok.*;
 import lombok.extern.jackson.Jacksonized;
-
-import java.util.List;
 
 @Jacksonized
 @AllArgsConstructor
