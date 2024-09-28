@@ -12,7 +12,6 @@ const AuthorizedLayout = () => {
 
   return (
     <div className="flex flex-row">
-      {isError && <div>{error?.message}</div>}
       <LoggedUserSidebar username={'Cezary Skorupski'} tokenCount={27}></LoggedUserSidebar>
       <Outlet />
     </div>
