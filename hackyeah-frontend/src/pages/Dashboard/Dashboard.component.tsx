@@ -1,3 +1,6 @@
+import { Plus } from "lucide-react"
+
+import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Tree from "@/components/tree";
 
@@ -22,11 +25,17 @@ const Dashboard = () => {
           </div>
           <hr />
           
-          <TabsContent value="mine" className="">
-            <Tree />
+          <TabsContent value="mine">
+            <div className="flex justify-between mr-5">
+              <Tree />
+              <Button size="icon" className="m-5">
+                <Plus className="h-4 w-4" />
+              </Button>
+            </div>
+            
           </TabsContent>
           
-          <TabsContent value="bought" className="">
+          <TabsContent value="bought">
             <Tree />
           </TabsContent>
         </Tabs>
