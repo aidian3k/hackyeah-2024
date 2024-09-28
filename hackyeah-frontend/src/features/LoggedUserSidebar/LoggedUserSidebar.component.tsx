@@ -1,24 +1,60 @@
-'use client';
 
-import React, { useState } from 'react';
-import { User, PlusCircle, Coins, Settings, LogOut, GraduationCap, School, Briefcase, ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState } from "react";
+import {
+  User,
+  PlusCircle,
+  Coins,
+  Settings,
+  LogOut,
+  GraduationCap,
+  School,
+  Briefcase,
+  ChevronLeft,
+  ChevronRight
+} from "lucide-react";
 
-import { Button } from '@/components/ui/button';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { useNavigate } from "react-router-dom";
+import { RoutePaths } from "@/router/Routes.types.ts";
+
+const Logo = () => (
+  <div className="flex items-center justify-center h-8 w-8 bg-blue-500 text-white rounded-full">D</div>
+);
 
 interface LoggedUserSidebarProps {
   username: string;
   tokenCount: number;
 }
 
-export default function LoggedUserSidebar({ username = 'John Doe', tokenCount = 100 }: LoggedUserSidebarProps) {
+export default function LoggedUserSidebar({ username, tokenCount }: LoggedUserSidebarProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const navigate = useNavigate();
 
-  const NavItem: React.FC<{ icon: React.ReactNode; children: React.ReactNode }> = ({ icon, children }) => (
+  const handleOptionClick = (option: string, path?: string) => {
+    setSelectedOption(option);
+    if (path) {
+      navigate(path); // Navigate to the provided path
+    }
+  };
+
+  const NavItem: React.FC<{ icon: React.ReactNode; children: React.ReactNode; option: string; path?: string }> = ({
+                                                                                                                    icon,
+                                                                                                                    children,
+                                                                                                                    option,
+                                                                                                                    path
+                                                                                                                  }) => (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" className={`w-full justify-start ${isCollapsed ? 'px-2' : ''}`}>
+          <Button
+            variant="ghost"
+            onClick={() => handleOptionClick(option, path)} // Pass the option and path to handle navigation
+            className={`w-full justify-start ${isCollapsed ? "px-2" : ""} hover:bg-gray-200 transition-colors ${
+              selectedOption === option ? "bg-blue-100" : ""
+            }`}
+          >
             {icon}
             {!isCollapsed && <span className="ml-2">{children}</span>}
           </Button>
@@ -29,11 +65,19 @@ export default function LoggedUserSidebar({ username = 'John Doe', tokenCount = 
   );
 
   const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-    <h3 className={`text-sm font-semibold text-gray-500 ${isCollapsed ? 'sr-only' : 'mb-2'}`}>{children}</h3>
+    <h3 className={`text-sm font-semibold text-gray-500 ${isCollapsed ? "sr-only" : "mb-2"}`}>{children}</h3>
   );
 
   return (
-    <div className={`flex flex-col h-screen bg-gray-100 text-gray-800 transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-64'}`}>
+    <div
+      className={`flex flex-col h-screen bg-gray-100 text-gray-800 transition-all duration-300 ${isCollapsed ? "w-16" : "w-64"}`}>
+      {/* Logo and App Name */}
+      <div className="p-4 border-b border-gray-200 flex justify-between items-center">
+        <div className="flex items-center space-x-2">
+          <Logo />
+          {!isCollapsed && <span className="font-bold text-lg">Dolphinder</span>}
+        </div>
+      </div>
       <div className="p-4 border-b border-gray-200 flex justify-between items-center">
         {!isCollapsed && <span className="font-semibold">{username}</span>}
         <Button variant="ghost" size="icon" onClick={() => setIsCollapsed(!isCollapsed)} className="ml-auto">
@@ -43,15 +87,30 @@ export default function LoggedUserSidebar({ username = 'John Doe', tokenCount = 
 
       <nav className="flex-1 p-4 space-y-2">
         <div>
+          <NavItem icon={<PlusCircle className="h-4 w-4" />} option="dashboard" path={RoutePaths.DASHBOARD}>
+            Dashboard
+          </NavItem>
+        </div>
+        <div>
           <SectionTitle>Szukaj</SectionTitle>
           <div className="space-y-1">
-            <NavItem icon={<GraduationCap className="h-4 w-4" />}>Uczelnia Wyższa</NavItem>
-            <NavItem icon={<School className="h-4 w-4" />}>Szkoła średnia</NavItem>
-            <NavItem icon={<Briefcase className="h-4 w-4" />}>Inne</NavItem>
+            <NavItem icon={<GraduationCap className="h-4 w-4" />} option="university" path={RoutePaths.MAIN_PAGE}>
+              Uczelnia Wyższa
+            </NavItem>
+            <NavItem icon={<School className="h-4 w-4" />} option="highSchool" path={RoutePaths.MAIN_PAGE}>
+              Szkoła średnia
+            </NavItem>
+            <NavItem icon={<Briefcase className="h-4 w-4" />} option="other" path={RoutePaths.MAIN_PAGE}>
+              Inne
+            </NavItem>
           </div>
         </div>
         <hr />
-        <NavItem icon={<PlusCircle className="h-4 w-4" />}>Dodaj materiał</NavItem>
+        <div>
+          <NavItem icon={<PlusCircle className="h-4 w-4" />} option="addMaterial" path={RoutePaths.ADD_MATERIAL}>
+            Dodaj materiał
+          </NavItem>
+        </div>
         <hr />
         <div className={`flex items-center space-x-2 px-4 py-2 rounded-md bg-gray-200 ${isCollapsed ? 'justify-center' : ''}`}>
           <Coins className="h-4 w-4" />
@@ -60,9 +119,20 @@ export default function LoggedUserSidebar({ username = 'John Doe', tokenCount = 
       </nav>
 
       <div className="p-4 border-t border-gray-200">
-        <NavItem icon={<User className="h-4 w-4" />}>Profil</NavItem>
-        <NavItem icon={<Settings className="h-4 w-4" />}>Ustawienia</NavItem>
-        <NavItem icon={<LogOut className="h-4 w-4" />}>Wyloguj</NavItem>
+        <NavItem icon={<Coins className="h-4 w-4" />} option="tokens">
+          <span>Tokeny: {tokenCount}</span>
+        </NavItem>
+      </div>
+      <div className="p-4 border-t border-gray-200">
+        <NavItem icon={<User className="h-4 w-4" />} option="profile">
+          Profil
+        </NavItem>
+        <NavItem icon={<Settings className="h-4 w-4" />} option="settings">
+          Ustawienia
+        </NavItem>
+        <NavItem icon={<LogOut className="h-4 w-4" />} option="logout" path={RoutePaths.LOGIN}>
+          Wyloguj
+        </NavItem>
       </div>
     </div>
   );

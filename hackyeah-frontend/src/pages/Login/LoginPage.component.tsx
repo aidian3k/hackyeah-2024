@@ -3,7 +3,7 @@ import LoginForm from './LoginForm/LoginForm.component';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Select } from '@/components/ui/select';
-import UnauthorizedTopBar from '@/features/top-bar/unauthorized-top-bar.tsx';
+import TopBar from '@/features/top-bar/top-bar.tsx';
 
 const LoginPage = () => {
   // const { login, isAuthenticated } = useAuth0();
@@ -14,20 +14,19 @@ const LoginPage = () => {
 
   return (
     <>
-    <UnauthorizedTopBar />
-    <div className="w-full h-screen flex justify-center items-center" style={{
+      <TopBar />
+      <div className="w-full h-screen flex justify-center items-center" style={{
       backgroundImage: `url(/images/home-page/note-1.jpg)`
-    }}>
-      <Card className="w-[500px]">
-        <CardHeader>
-          <CardTitle>Zaloguj się</CardTitle>
-          <CardDescription>Zaloguj się, aby przegladać materiały.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <LoginForm />
-        </CardContent>
-      </Card>
-    </div>
+    }}>        <Card className="w-[500px]">
+          <CardHeader>
+            <CardTitle>Zaloguj się</CardTitle>
+            <CardDescription>Zaloguj się, aby przegladać materiały.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <LoginForm />
+          </CardContent>
+        </Card>
+      </div>
     </>
   );
 };
