@@ -1,8 +1,10 @@
 package ee.pw.hackyeah.hackyeahbackend.user.domain;
 
+import ee.pw.hackyeah.hackyeahbackend.infrastructure.exception.GenericAppException;
 import ee.pw.hackyeah.hackyeahbackend.user.application.in.UserRegistrationInput;
 import ee.pw.hackyeah.hackyeahbackend.user.application.out.UserRegistrationResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,16 @@ public class UserService {
     public UserRegistrationResponse registerUser(
         UserRegistrationInput userRegistrationInput
     ) {
+        if (userRepository.existsByEmail(userRegistrationInput.email())) {
+            throw GenericAppException.of(
+                "User with email " +
+                userRegistrationInput.email() +
+                " already exists",
+                    new IllegalArgumentException(),
+                    HttpStatus.BAD_REQUEST
+            );
+        }
+
         User user = User
             .builder()
             .firstName(userRegistrationInput.firstName())
@@ -23,7 +35,7 @@ public class UserService {
             .birthDate(userRegistrationInput.birthDate())
             .lastName(userRegistrationInput.lastName())
             .nickName(userRegistrationInput.nickName())
-                .password(passwordEncoder.encode(userRegistrationInput.password()))
+            .password(passwordEncoder.encode(userRegistrationInput.password()))
             .phoneNumber(userRegistrationInput.phoneNumber())
             .build();
 
