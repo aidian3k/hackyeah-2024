@@ -22,7 +22,7 @@ interface LoggedUserSidebarProps {
   tokenCount: number;
 }
 
-export default function LoggedUserSidebar({ username = "John Doe", tokenCount = 100 }: LoggedUserSidebarProps) {
+export default function LoggedUserSidebar({ username, tokenCount }: LoggedUserSidebarProps) {
   const [isCollapsed, setIsCollapsed] = useState(false)
 
   const NavItem: React.FC<{ icon: React.ReactNode; children: React.ReactNode }> = ({ icon, children }) => (
@@ -69,13 +69,11 @@ export default function LoggedUserSidebar({ username = "John Doe", tokenCount = 
         <hr />
         <NavItem icon={<PlusCircle className="h-4 w-4" />}>Dodaj materiał</NavItem>
         <hr />
-        <div
-          className={`flex items-center space-x-2 px-4 py-2 rounded-md bg-gray-200 ${isCollapsed ? "justify-center" : ""}`}>
-          <Coins className="h-4 w-4" />
-          {!isCollapsed && <span>Tokeny: {tokenCount}</span>}
-        </div>
       </nav>
 
+      <div className="p-4 border-t border-gray-200">
+        <NavItem icon={<Coins className="h-4 w-4" />}><span>Tokeny: {tokenCount}</span></NavItem>
+      </div>
       <div className="p-4 border-t border-gray-200">
         <NavItem icon={<User className="h-4 w-4" />}>Profil</NavItem>
         <NavItem icon={<Settings className="h-4 w-4" />}>Ustawienia</NavItem>
