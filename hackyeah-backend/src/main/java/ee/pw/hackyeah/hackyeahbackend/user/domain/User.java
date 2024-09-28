@@ -11,8 +11,6 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,7 +20,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user_account")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
