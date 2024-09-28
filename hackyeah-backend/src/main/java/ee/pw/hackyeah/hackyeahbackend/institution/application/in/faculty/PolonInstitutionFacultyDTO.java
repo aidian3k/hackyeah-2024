@@ -1,4 +1,4 @@
-package ee.pw.hackyeah.hackyeahbackend.unit.application.in;
+package ee.pw.hackyeah.hackyeahbackend.institution.application.in.faculty;
 
 import lombok.*;
 import lombok.extern.jackson.Jacksonized;
@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class PolonInstitutionUnitsDTO {
+public class PolonInstitutionFacultyDTO {
 
     private List<UnitInfo> units;
 

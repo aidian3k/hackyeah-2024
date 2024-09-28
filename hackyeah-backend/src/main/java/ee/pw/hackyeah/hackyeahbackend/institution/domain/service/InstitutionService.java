@@ -52,4 +52,8 @@ public class InstitutionService {
 
         return new InstitutionOutDTO(singleInstitutions);
     }
+
+    public Institution getInstitutionByUid(String uid) {
+        return institutionsRepository.findById(uid).orElse(null);
+    }
 }
