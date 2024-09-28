@@ -3,5 +3,7 @@ export enum RoutePaths {
   LOGIN = '/auth/login',
   REGISTER = '/auth/register',
   DASHBOARD = '/dashboard',
-  ADD_MATERIAL = '/dashboard/materials/add'
+  ADD_MATERIAL = '/dashboard/materials/add',
+  ABOUT = '/about-us',
+  FAQ = '/faq'
 }

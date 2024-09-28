@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import { ModeToggle } from '@/components/mode-toggle.tsx';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { RoutePaths } from '@/router/Routes.types.ts';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store.ts';
@@ -32,9 +32,9 @@ export default function TopBar() {
           <a href="/dodaj-notatke" className="text-foreground hover:text-primary duration-200 transition-colors">
             Dodaj notatkę
           </a>
-          <a href="/o-nas" className="text-foreground hover:text-primary duration-200 transition-colors">
+          <Link to={RoutePaths.ABOUT} className="text-foreground hover:text-primary duration-200 transition-colors">
             O nas
-          </a>
+          </Link>
           <a href="/kontakt" className="text-foreground hover:text-primary duration-200 transition-colors">
             Kontakt
           </a>

@@ -44,7 +44,7 @@ public class Media {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "note_id")
+    @JoinColumn(name = "learning_resource_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private LearningResource learningResource;
