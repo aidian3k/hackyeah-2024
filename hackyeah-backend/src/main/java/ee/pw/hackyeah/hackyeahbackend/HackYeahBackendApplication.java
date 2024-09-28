@@ -6,8 +6,8 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
-@EnableCaching
 @EnableFeignClients
+@EnableCaching
 class HackYeahBackendApplication {
 
     public static void main(String[] args) {

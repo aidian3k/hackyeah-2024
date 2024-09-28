@@ -2,11 +2,14 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import { ModeToggle } from '@/components/mode-toggle.tsx';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { RoutePaths } from '@/router/Routes.types.ts';
 
-export default function TopBar() {
+export default function UnauthorizedTopBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const navigate = useNavigate();
 
   return (
     <header className="w-full py-4 px-6 bg-background shadow-sm">
@@ -38,8 +41,10 @@ export default function TopBar() {
         <div className="flex items-center space-x-4 justify-self-end">
           <ModeToggle />
           <div className="hidden md:flex space-x-4">
-            <Button variant="outline">Zaloguj</Button>
-            <Button>Zarejestruj</Button>
+            <Button variant="outline" onClick={() => navigate(RoutePaths.LOGIN)}>
+              Zaloguj się
+            </Button>
+            <Button onClick={() => navigate(RoutePaths.REGISTER)}>Zarejestruj się</Button>
           </div>
           <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleMenu}>
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -64,10 +69,12 @@ export default function TopBar() {
             <a href="/faq" className="text-gray-600 hover:text-primary transition-colors">
               FAQ
             </a>
-            <Button variant="outline" className="w-full">
-              Zaloguj
+            <Button variant="outline" className="w-full" onClick={() => navigate(RoutePaths.LOGIN)}>
+              Zaloguj się
             </Button>
-            <Button className="w-full">Zarejestruj</Button>
+            <Button className="w-full" onClick={() => navigate(RoutePaths.REGISTER)}>
+              Zarejestruj się
+            </Button>
           </nav>
         </div>
       )}
