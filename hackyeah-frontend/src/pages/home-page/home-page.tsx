@@ -6,6 +6,8 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { useActuatorExampeQuery } from '@/api/query/actuatorExampleQuery.ts';
 import { useToast } from '@/hooks/use-toast.ts';
+import TopBar from "@/features/top-bar/top-bar.tsx";
+import {MagnifyingGlassIcon} from "@radix-ui/react-icons";
 
 const universities = [
   'Harvard University',
@@ -21,6 +23,8 @@ const universities = [
   'National University of Singapore',
   'Peking University'
 ];
+
+const bgImagesPrefix: string = '/images/home-page/note';
 
 export default function HomePage() {
   const { data, isError, error } = useActuatorExampeQuery({});
@@ -40,7 +44,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-14 items-center">NAVBAR</div>
+        <TopBar />
       </header>
       <main className="w-full">
         <div className="relative mb-8">
@@ -52,12 +56,13 @@ export default function HomePage() {
                     <div
                       className="absolute inset-0 bg-cover bg-center"
                       style={{
-                        backgroundImage: `url(/images/home-page/note-${index + 1}.jpg)`
+                        backgroundImage: `url(${bgImagesPrefix}-${index + 1}.jpg)`
                       }}
                     ></div>
                     <div className="absolute inset-0 bg-black/50" />
-                    <div className="absolute inset-x-0 top-[20%] md:top-1/3 flex items-center justify-center">
-                      <h2 className="text-7xl font-bold text-white text-center">Przekazuj wiedzę,<br/> odbieraj wiedzę</h2>
+                    <div className="absolute inset-x-0 top-[20%] md:top-1/3 flex flex-col gap-3 items-center justify-center">
+                      <h2 className="text-5xl font-bold text-white text-center">Znajdź notatki i zalicz każdy egzamin!</h2>
+                      <h2 className="text-xl text-white text-center">Przeglądaj i udostępniaj materiały ze swojej uczelni.</h2>
                     </div>
                   </div>
                 </CarouselItem>
@@ -67,16 +72,20 @@ export default function HomePage() {
             <CarouselNext className="right-4" />
           </Carousel>
           <div className="absolute inset-x-0 bottom-1/3 flex flex-col justify-center items-center">
-            <div className="mx-auto min-w-96 px-5">
+            <div className="mx-auto min-w-[320px] px-5">
               <Tabs defaultValue="Studia" onValueChange={setActiveCategory}>
-                <TabsList className="rounded-b-none">
-                  <TabsTrigger value="Studia">Studia</TabsTrigger>
-                  <TabsTrigger value="Szkoła średnia">Szkoła średnia</TabsTrigger>
-                  <TabsTrigger value="Inne">Inne</TabsTrigger>
+                <TabsList className="rounded-b-none h-fit">
+                  <TabsTrigger className={"py-2 px-4"} value="Studia">Studia</TabsTrigger>
+                  <TabsTrigger className={"py-2 px-4"} value="Szkoła średnia">Szkoła średnia</TabsTrigger>
+                  <TabsTrigger className={"py-2 px-4"} value="Inne">Inne</TabsTrigger>
                 </TabsList>
               </Tabs>
-              <Input size={222}  className="w-full max-w-2xl bg-white/90 backdrop-blur rounded-tl-none" placeholder="Search universities..." />
-            </div>
+              <div className={"flex h-fit"}>
+              <Input size={300} className="rounded-r-none w-full max-w-2xl bg-white/90 backdrop-blur rounded-tl-none h-16" placeholder="Search universities..." />
+              <Button className={"rounded-l-none h-16"} size={"lg"}>
+                <MagnifyingGlassIcon className="mr-2 h-4 w-4" />Szukaj</Button>
+              </div>
+              </div>
           </div>
         </div>
         <div className="container mx-auto px-4 py-8 relative -top-56">
