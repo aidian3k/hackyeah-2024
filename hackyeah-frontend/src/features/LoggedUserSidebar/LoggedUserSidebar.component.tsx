@@ -1,26 +1,12 @@
+import React, { useState } from 'react';
+import { User, PlusCircle, Coins, Settings, LogOut, GraduationCap, School, Briefcase, ChevronLeft, ChevronRight } from 'lucide-react';
 
-import React, { useState } from "react";
-import {
-  User,
-  PlusCircle,
-  Coins,
-  Settings,
-  LogOut,
-  GraduationCap,
-  School,
-  Briefcase,
-  ChevronLeft,
-  ChevronRight
-} from "lucide-react";
+import { Button } from '@/components/ui/button';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { useNavigate } from 'react-router-dom';
+import { RoutePaths } from '@/router/Routes.types.ts';
 
-import { Button } from "@/components/ui/button";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { useNavigate } from "react-router-dom";
-import { RoutePaths } from "@/router/Routes.types.ts";
-
-const Logo = () => (
-  <div className="flex items-center justify-center h-8 w-8 bg-blue-500 text-white rounded-full">D</div>
-);
+const Logo = () => <div className="flex items-center justify-center h-8 w-8 bg-blue-500 text-white rounded-full">D</div>;
 
 interface LoggedUserSidebarProps {
   username: string;
@@ -40,19 +26,19 @@ export default function LoggedUserSidebar({ username, tokenCount }: LoggedUserSi
   };
 
   const NavItem: React.FC<{ icon: React.ReactNode; children: React.ReactNode; option: string; path?: string }> = ({
-                                                                                                                    icon,
-                                                                                                                    children,
-                                                                                                                    option,
-                                                                                                                    path
-                                                                                                                  }) => (
+    icon,
+    children,
+    option,
+    path
+  }) => (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
           <Button
             variant="ghost"
             onClick={() => handleOptionClick(option, path)} // Pass the option and path to handle navigation
-            className={`w-full justify-start ${isCollapsed ? "px-2" : ""} hover:bg-gray-200 transition-colors ${
-              selectedOption === option ? "bg-blue-100" : ""
+            className={`w-full justify-start ${isCollapsed ? 'px-2' : ''} hover:bg-gray-200 transition-colors ${
+              selectedOption === option ? 'bg-blue-100' : ''
             }`}
           >
             {icon}
@@ -65,12 +51,11 @@ export default function LoggedUserSidebar({ username, tokenCount }: LoggedUserSi
   );
 
   const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-    <h3 className={`text-sm font-semibold text-gray-500 ${isCollapsed ? "sr-only" : "mb-2"}`}>{children}</h3>
+    <h3 className={`text-sm font-semibold text-gray-500 ${isCollapsed ? 'sr-only' : 'mb-2'}`}>{children}</h3>
   );
 
   return (
-    <div
-      className={`flex flex-col h-screen bg-gray-100 text-gray-800 transition-all duration-300 ${isCollapsed ? "w-16" : "w-64"}`}>
+    <div className={`flex flex-col h-screen bg-gray-100 text-gray-800 transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-64'}`}>
       {/* Logo and App Name */}
       <div className="p-4 border-b border-gray-200 flex justify-between items-center">
         <div className="flex items-center space-x-2">

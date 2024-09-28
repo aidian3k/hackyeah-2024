@@ -1,5 +1,5 @@
 export type Unit = {
-  uid: string;
+  uuid: string;
   name: string;
   status: string;
 };

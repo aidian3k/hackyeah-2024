@@ -8,10 +8,11 @@ export const useGetUnits = (params: UnitsQueryParams) => {
   return useQuery<UnitsApiResponse, AxiosError>({
     queryKey: ['units', JSON.stringify(params)],
     queryFn: async () => {
-      const institutionId = params.institutionId;
-      // TODO przekazać to jakoś do zapytania
+      const queryParams: any = {
+        institutionId: params.institutionId
+      };
 
-      const res = await axiosInstance.get(Endpoints.ACADEMIC_INSTITUTIONS);
+      const res = await axiosInstance.get(Endpoints.UNITS, { params: queryParams });
 
       return res.data;
     }

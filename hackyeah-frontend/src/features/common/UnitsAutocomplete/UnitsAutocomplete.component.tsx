@@ -14,18 +14,21 @@ type FacultiesAutocompleteProps = {
   unitFieldName: string;
 };
 
-const FacultiesAutocomplete: React.FC<FacultiesAutocompleteProps> = ({ institutionFieldName, unitFieldName }) => {
+const UnitsAutocomplete: React.FC<FacultiesAutocompleteProps> = ({ institutionFieldName, unitFieldName }) => {
   const [open, setOpen] = useState(false);
+
   const { watch, setValue } = useFormContext();
-  const currentFaculty = watch(unitFieldName);
+
   const currentInstitution = watch(institutionFieldName);
-  const { data: units, isLoading, isSuccess } = useGetUnits({ institutionId: currentFaculty.uid });
+  const currentUnit = watch(unitFieldName);
+
+  const { data: units, isLoading, isSuccess } = useGetUnits({ institutionId: currentInstitution });
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="outline" role="combobox" aria-expanded={open} className="w-[200px] justify-between">
-          {currentFaculty && isSuccess ? units.units.find(units => units.name === currentFaculty.name)?.name : 'Wybierz wydział'}
+        <Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between">
+          {currentUnit && isSuccess ? units.units.find(unit => unit.uuid === currentUnit)?.name : 'Wybierz wydział'}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -38,14 +41,15 @@ const FacultiesAutocomplete: React.FC<FacultiesAutocompleteProps> = ({ instituti
               {isSuccess &&
                 units.units.map(unit => (
                   <CommandItem
-                    key={unit.uid}
+                    key={unit.uuid}
                     value={unit.name}
-                    onSelect={currentValue => {
-                      setValue(unitFieldName, currentValue === unit.name ? '' : currentValue);
+                    onSelect={() => {
+                      // Ustawiamy pełny obiekt jednostki (uid i name)
+                      setValue(unitFieldName, unit.uuid);
                       setOpen(false);
                     }}
                   >
-                    <Check className={cn('mr-2 h-4 w-4', currentFaculty.name === unit.name ? 'opacity-100' : 'opacity-0')} />
+                    <Check className={cn('mr-2 h-4 w-4', currentUnit?.uuid === unit.uuid ? 'opacity-100' : 'opacity-0')} />
                     {unit.name}
                   </CommandItem>
                 ))}
@@ -57,4 +61,4 @@ const FacultiesAutocomplete: React.FC<FacultiesAutocompleteProps> = ({ instituti
   );
 };
 
-export default FacultiesAutocomplete;
+export default UnitsAutocomplete;

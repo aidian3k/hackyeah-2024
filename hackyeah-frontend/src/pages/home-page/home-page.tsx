@@ -90,7 +90,7 @@ export default function HomePage() {
             <CarouselPrevious className="left-4" />
             <CarouselNext className="right-4" />
           </Carousel>
-          <div className="absolute inset-x-0 bottom-1/3 flex flex-col justify-center items-center">
+          <div className="absolute inset-x-0 bottom-[200px] flex flex-col justify-center items-center">
             <div className="mx-auto min-w-[320px] px-5">
               <Tabs defaultValue="Studia" onValueChange={setActiveCategory}>
                 <TabsList className="rounded-b-none h-fit">
@@ -116,23 +116,11 @@ export default function HomePage() {
                   Szukaj
                 </Button>
               </div>
+              <div className="pt-16">
+                <MainPageFilters />
+              </div>
             </div>
           </div>
-        </div>
-        <div className="absolute inset-x-0 bottom-1/3 flex flex-col justify-center items-center">
-          <MainPageFilters />
-        </div>
-        <div className="container mx-auto px-4 py-8 relative -top-56">
-          <Card className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 p-5">
-            {universities.map((university, index) => (
-              <Card key={index}>
-                <CardContent className="flex items-center justify-between p-4">
-                  <span className="text-lg font-medium">{university}</span>
-                  <Button variant="outline">View</Button>
-                </CardContent>
-              </Card>
-            ))}
-          </Card>
         </div>
       </main>
     </div>

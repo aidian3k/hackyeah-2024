@@ -8,6 +8,7 @@ import * as React from 'react';
 import { Check, ChevronsUpDown } from 'lucide-react';
 import { useGetAcademicInstitutions } from '@/api/query/academicInstitutionsQuery';
 import { useFormContext } from 'react-hook-form';
+import { current } from '@reduxjs/toolkit';
 
 type UniversitiesAutocompleteProps = {
   fieldName: string;
@@ -27,14 +28,11 @@ const UniversitiesAutocomplete: React.FC<UniversitiesAutocompleteProps> = ({ fie
 
   return (
     <div>
-      {/* Register the field */}
-      <input type="hidden" {...register(fieldName)} />
-
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button variant="outline" role="combobox" aria-expanded={open} className="w-[200px] justify-between">
+          <Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between">
             {currentInstitution && isSuccess
-              ? academicInstitutions?.institutions.find(institution => institution.name === currentInstitution)?.name
+              ? academicInstitutions?.institutions.find(institution => institution.id === currentInstitution)?.name
               : 'Wybierz uczelnię'}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
@@ -51,12 +49,11 @@ const UniversitiesAutocomplete: React.FC<UniversitiesAutocompleteProps> = ({ fie
                       key={institution.id}
                       value={institution.name}
                       onSelect={currentValue => {
-                        // Update form value when an institution is selected
-                        setValue(fieldName, currentValue === institution.name ? '' : currentValue);
+                        setValue(fieldName, institution.id);
                         setOpen(false);
                       }}
                     >
-                      <Check className={cn('mr-2 h-4 w-4', currentInstitution === institution.name ? 'opacity-100' : 'opacity-0')} />
+                      <Check className={cn('mr-2 h-4 w-4', currentInstitution === institution.id ? 'opacity-100' : 'opacity-0')} />
                       {institution.name}
                     </CommandItem>
                   ))}

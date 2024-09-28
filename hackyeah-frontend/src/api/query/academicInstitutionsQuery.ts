@@ -15,13 +15,7 @@ export const useGetAcademicInstitutions = (params: AcademicInstitutionsQueryPara
         filters: JSON.stringify(filters)
       };
 
-      const res = await axiosInstance.request({
-        url: Endpoints.ACADEMIC_INSTITUTIONS,
-        method: 'GET',
-        data: {
-          name: params.name
-        }
-      });
+      const res = await axiosInstance.post(Endpoints.ACADEMIC_INSTITUTIONS, { data: filters });
 
       return res.data;
     }
