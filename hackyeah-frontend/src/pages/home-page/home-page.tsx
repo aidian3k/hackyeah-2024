@@ -6,6 +6,7 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { useActuatorExampeQuery } from '@/api/query/actuatorExampleQuery.ts';
 import { useToast } from '@/hooks/use-toast.ts';
+import UniversitiesAutocomplete from '@/features/common/UniversitiesAutocomplete/UniversitiesAutocomplete.component';
 
 const universities = [
   'Harvard University',
@@ -67,6 +68,8 @@ export default function HomePage() {
             <CarouselNext className="right-4" />
           </Carousel>
           <div className="absolute inset-x-0 bottom-1/3 flex flex-col justify-center items-center">
+          <UniversitiesAutocomplete />
+
             <div className="mx-auto min-w-96">
               <Tabs defaultValue="Studia" onValueChange={setActiveCategory}>
                 <TabsList className="rounded-b-none">
