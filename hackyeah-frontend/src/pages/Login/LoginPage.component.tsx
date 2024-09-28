@@ -3,6 +3,7 @@ import LoginForm from './LoginForm/LoginForm.component';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Select } from '@/components/ui/select';
+import UnauthorizedTopBar from '@/features/top-bar/unauthorized-top-bar.tsx';
 
 const LoginPage = () => {
   // const { login, isAuthenticated } = useAuth0();
@@ -12,6 +13,8 @@ const LoginPage = () => {
   // }
 
   return (
+    <>
+    <UnauthorizedTopBar />
     <div className="w-full h-screen flex justify-center items-center" style={{
       backgroundImage: `url(/images/home-page/note-1.jpg)`
     }}>
@@ -25,6 +28,7 @@ const LoginPage = () => {
         </CardContent>
       </Card>
     </div>
+    </>
   );
 };
 
