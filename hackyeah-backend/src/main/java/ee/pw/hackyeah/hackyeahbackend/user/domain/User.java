@@ -1,5 +1,6 @@
 package ee.pw.hackyeah.hackyeahbackend.user.domain;
 
+import ee.pw.hackyeah.hackyeahbackend.learningresource.domain.LearningResource;
 import ee.pw.hackyeah.hackyeahbackend.media.domain.Media;
 import ee.pw.hackyeah.hackyeahbackend.review.domain.Review;
 import jakarta.persistence.CascadeType;
@@ -81,4 +82,14 @@ public class User extends AppUserDetails {
     @ToString.Exclude
     @Builder.Default
     private Set<Review> reviews = new HashSet<>();
+
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            mappedBy = "author"
+    )
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @Builder.Default
+    private Set<LearningResource> learningResources = new HashSet<>();
 }
