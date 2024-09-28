@@ -5,7 +5,7 @@ import lombok.Builder;
 
 @Builder
 public record ReviewDTO(
-    Long subjectId,
+    Long learningResourceId,
     Long reviewId,
     Long rating,
     String comment,

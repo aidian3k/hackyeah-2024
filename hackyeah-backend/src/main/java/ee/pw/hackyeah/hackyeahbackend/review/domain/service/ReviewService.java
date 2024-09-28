@@ -11,6 +11,9 @@ import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +24,7 @@ public class ReviewService {
     private final EntityManager entityManager;
     private final UserService userService;
 
+    @Transactional
     public ReviewDTO createReview(ReviewInputDTO reviewInputDTO) {
         final User user = userService.getCurrentUser();
         LearningResource learningResource = entityManager.getReference(
@@ -44,9 +48,27 @@ public class ReviewService {
             .createdAt(savedReview.getCreatedAt())
             .authorName(user.getFirstName())
             .rating(savedReview.getRating())
-            .subjectId(learningResource.getId())
+            .learningResourceId(learningResource.getId())
             .reviewId(savedReview.getId())
             .comment(savedReview.getComment())
             .build();
+    }
+
+    @Transactional(readOnly = true)
+    public List<ReviewDTO> getReviewsByLearningId(Long learningResourceId) {
+        return reviewRepository
+            .findAllByLearningResourceId(learningResourceId)
+            .stream()
+            .map(review -> ReviewDTO
+                .builder()
+                .createdAt(review.getCreatedAt())
+                .authorName(review.getAuthor().getFirstName())
+                .rating(review.getRating())
+                .learningResourceId(review.getLearningResource().getId())
+                .reviewId(review.getId())
+                .comment(review.getComment())
+                .build()
+            )
+            .toList();
     }
 }
