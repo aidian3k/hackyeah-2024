@@ -1,6 +1,6 @@
 package ee.pw.hackyeah.hackyeahbackend.review.domain;
 
-import ee.pw.hackyeah.hackyeahbackend.note.domain.Note;
+import ee.pw.hackyeah.hackyeahbackend.learningresource.domain.LearningResource;
 import ee.pw.hackyeah.hackyeahbackend.user.domain.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -56,5 +56,5 @@ public class Review {
     @JoinColumn(name = "note_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private Note note;
+    private LearningResource learningResource;
 }

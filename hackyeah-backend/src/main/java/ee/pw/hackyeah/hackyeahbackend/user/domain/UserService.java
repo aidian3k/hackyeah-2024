@@ -5,6 +5,7 @@ import ee.pw.hackyeah.hackyeahbackend.user.application.in.UserRegistrationInput;
 import ee.pw.hackyeah.hackyeahbackend.user.application.out.UserRegistrationResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -47,5 +48,12 @@ public class UserService {
             .email(registeredUser.getLastName())
             .nickName(registeredUser.getNickName())
             .build();
+    }
+
+    public User getCurrentUser() {
+        return (User) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
     }
 }
