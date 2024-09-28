@@ -14,9 +14,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import java.time.LocalDateTime;
-
 import jakarta.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -56,12 +55,10 @@ public class Media {
     @ToString.Exclude
     private User user;
 
-    @NotNull
-    @Column(name = "object_key")
+    @NotNull @Column(name = "object_key")
     private String objectKey;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
+    @NotNull @Enumerated(EnumType.STRING)
     private MediaType mediaType;
 
     @CreationTimestamp

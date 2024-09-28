@@ -37,5 +37,6 @@ public class Institution {
     )
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
+    @Builder.Default
     private Set<Faculty> faculties = new HashSet<>();
 }
