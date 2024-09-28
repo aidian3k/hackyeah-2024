@@ -109,11 +109,8 @@ const Tree = ({}) => {
       }
     
       return (
-        <div className="p-4 bg-white rounded-lg shadow">
-          <h2 className="text-lg font-semibold mb-4">Category Structure</h2>
-          <div className="border rounded p-2">
+        <div className="items-center p-4 bg-white rounded-lg shadow h-full w-3/4">
             <TreeNode node={categoryTree} path={[]} level={0} />
-          </div>
         </div>
       )
     }
