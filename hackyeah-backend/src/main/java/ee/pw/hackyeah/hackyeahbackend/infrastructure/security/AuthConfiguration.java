@@ -34,12 +34,15 @@ class AuthConfiguration {
 
     @Bean
     public DaoAuthenticationProvider configureDaoAuthenticationProvider() {
-        DaoAuthenticationProvider tokenAuthenticationProvider = new DaoAuthenticationProvider();
+        DaoAuthenticationProvider tokenAuthenticationProvider =
+            new DaoAuthenticationProvider();
         tokenAuthenticationProvider.setUserDetailsService(
-                configureUserDetailsService()
+            configureUserDetailsService()
         );
         tokenAuthenticationProvider.setHideUserNotFoundExceptions(true);
-        tokenAuthenticationProvider.setPasswordEncoder(configurePasswordEncoder());
+        tokenAuthenticationProvider.setPasswordEncoder(
+            configurePasswordEncoder()
+        );
 
         return tokenAuthenticationProvider;
     }
@@ -52,10 +55,12 @@ class AuthConfiguration {
     @Bean
     public UserDetailsService configureUserDetailsService() {
         return email ->
-                userRepository
-                        .findByEmail(email)
-                        .orElseThrow(() ->
-                                new BadCredentialsException("User witch such email not found")
-                        );
+            userRepository
+                .findByEmail(email)
+                .orElseThrow(() ->
+                    new BadCredentialsException(
+                        "User witch such email not found"
+                    )
+                );
     }
 }

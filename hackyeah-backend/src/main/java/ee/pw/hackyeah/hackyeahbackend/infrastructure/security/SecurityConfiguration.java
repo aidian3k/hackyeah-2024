@@ -11,10 +11,8 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.security.web.csrf.CsrfTokenRepository;
 
 @Configuration
 @EnableWebSecurity
@@ -24,7 +22,7 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain configureSecurityFilterChain(
-            HttpSecurity httpSecurity
+        HttpSecurity httpSecurity
     ) throws Exception {
         httpSecurity.httpBasic(AbstractHttpConfigurer::disable);
         httpSecurity.cors(AbstractHttpConfigurer::disable);
@@ -32,65 +30,76 @@ public class SecurityConfiguration {
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
 
         httpSecurity.formLogin(httpSecurityFormLoginConfigurer -> {
-            httpSecurityFormLoginConfigurer.loginProcessingUrl("/api/auth/login");
+            httpSecurityFormLoginConfigurer.loginProcessingUrl(
+                "/api/auth/login"
+            );
             httpSecurityFormLoginConfigurer.authenticationDetailsSource(
-                    new WebAuthenticationDetailsSource()
+                new WebAuthenticationDetailsSource()
             );
             httpSecurityFormLoginConfigurer.successHandler(
-                    (
-                            (request, response, authentication) -> {
-                                response.setStatus(HttpStatus.OK.value());
-                            }
-                    )
+                (
+                    (request, response, authentication) -> {
+                        response.setStatus(HttpStatus.OK.value());
+                    }
+                )
             );
             httpSecurityFormLoginConfigurer.usernameParameter("email");
             httpSecurityFormLoginConfigurer.passwordParameter("password");
             httpSecurityFormLoginConfigurer.failureHandler(
-                   (request, response, exception) -> response.setStatus(HttpStatus.FORBIDDEN.value())
+                    (request, response, exception) ->
+                response.setStatus(HttpStatus.UNAUTHORIZED.value())
             );
         });
 
         httpSecurity.logout(httpSecurityLogoutConfigurer -> {
             httpSecurityLogoutConfigurer.clearAuthentication(true);
-            httpSecurityLogoutConfigurer.logoutUrl("/api/auth/logout").permitAll();
+            httpSecurityLogoutConfigurer
+                .logoutUrl("/api/auth/logout")
+                .permitAll();
             httpSecurityLogoutConfigurer.deleteCookies("JSESSIONID");
             httpSecurityLogoutConfigurer.logoutSuccessHandler(
-                    (
-                            (request, response, authentication) -> {
-                                response.setStatus(HttpStatus.OK.value());
-                                SecurityContextHolder.clearContext();
-                            }
-                    )
+                (
+                    (request, response, authentication) -> {
+                        response.setStatus(HttpStatus.OK.value());
+                        SecurityContextHolder.clearContext();
+                    }
+                )
             );
         });
 
         httpSecurity.authorizeHttpRequests(requestMatcherRegistry -> {
-            requestMatcherRegistry.requestMatchers("/api/auth/login").permitAll();
             requestMatcherRegistry
-                    .requestMatchers("/api/auth/register")
-                    .permitAll();
+                .requestMatchers("/api/auth/login")
+                .permitAll();
+            requestMatcherRegistry
+                .requestMatchers("/api/auth/register")
+                .permitAll();
         });
 
         httpSecurity.exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
-                httpSecurityExceptionHandlingConfigurer
-                        .accessDeniedHandler((request, response, accessDeniedException) -> {
-                            response.setStatus(HttpStatus.FORBIDDEN.value());
-                            new HttpStatusEntryPoint(HttpStatus.FORBIDDEN);
-                        })
-                        .authenticationEntryPoint((request, response, authException) -> {
-                            response.setStatus(HttpStatus.UNAUTHORIZED.value());
-                            new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED);
-                        })
-        );
-
-        httpSecurity.sessionManagement(httpSecuritySessionManagementConfigurer ->
-                httpSecuritySessionManagementConfigurer.sessionCreationPolicy(
-                        SessionCreationPolicy.ALWAYS
+            httpSecurityExceptionHandlingConfigurer
+                .accessDeniedHandler(
+                    (request, response, accessDeniedException) -> {
+                        response.setStatus(HttpStatus.FORBIDDEN.value());
+                        new HttpStatusEntryPoint(HttpStatus.FORBIDDEN);
+                    }
+                )
+                .authenticationEntryPoint(
+                    (request, response, authException) -> {
+                        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+                        new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED);
+                    }
                 )
         );
 
+        httpSecurity.sessionManagement(httpSecuritySessionManagementConfigurer ->
+            httpSecuritySessionManagementConfigurer.sessionCreationPolicy(
+                SessionCreationPolicy.ALWAYS
+            )
+        );
+
         httpSecurity.authorizeHttpRequests(requestMatcherRegistry ->
-                requestMatcherRegistry.anyRequest().authenticated()
+            requestMatcherRegistry.anyRequest().authenticated()
         );
 
         return httpSecurity.build();
