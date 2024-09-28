@@ -55,7 +55,7 @@ public class Review {
     private User author;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "note_id")
+    @JoinColumn(name = "learning_resource_idž")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private LearningResource learningResource;
