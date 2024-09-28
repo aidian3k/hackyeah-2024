@@ -8,7 +8,6 @@ import RegisterPage from '@/pages/Register/RegisterPage.component';
 import AuthorizedLayout from '@/features/AuthorizedLayout.component.tsx';
 import HomePage from '@/pages/home-page/home-page.tsx';
 import Dashboard from '@/pages/Dashboard/Dashboard.component';
-import UnauthorizedTopBar from '@/features/top-bar/unauthorized-top-bar.tsx';
 
 const AppRoutes: FC = () => {
   const { authenticated } = useSelector((state: RootState) => state.user);

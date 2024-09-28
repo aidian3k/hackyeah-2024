@@ -4,9 +4,15 @@ import { Menu, X } from 'lucide-react';
 import { ModeToggle } from '@/components/mode-toggle.tsx';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { RoutePaths } from '@/router/Routes.types.ts';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store.ts';
+import { UserState } from '@/store/user/user.slice.ts';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar.tsx';
+import AvatarWithName, { DropdownForAvatar } from '@/components/avatar-with-name.tsx';
 
-export default function UnauthorizedTopBar() {
+export default function TopBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const user: UserState = useSelector((state: RootState) => state.user);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const navigate = useNavigate();
@@ -38,19 +44,31 @@ export default function UnauthorizedTopBar() {
         </nav>
 
         {/* Right side - Auth buttons and mobile menu button */}
-        <div className="flex items-center space-x-4 justify-self-end">
-          <ModeToggle />
-          <div className="hidden md:flex space-x-4">
-            <Button variant="outline" onClick={() => navigate(RoutePaths.LOGIN)}>
-              Zaloguj się
-            </Button>
-            <Button onClick={() => navigate(RoutePaths.REGISTER)}>Zarejestruj się</Button>
+        {user.authenticated ? (
+          <div className="flex items-center space-x-4 justify-self-end">
+            <ModeToggle />
+            <DropdownForAvatar
+              name={'Cristiano'}
+              surname={'Ronaldo'}
+              email={'ronaldo@gmail.com'}
+              pictureUrl={'https://www.aljazeera.com/wp-content/uploads/2022/08/GettyImages-83985994.jpg'}
+            />
           </div>
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleMenu}>
-            {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            <span className="sr-only">Toggle menu</span>
-          </Button>
-        </div>
+        ) : (
+          <div className="flex items-center space-x-4 justify-self-end">
+            <ModeToggle />
+            <div className="hidden md:flex space-x-4">
+              <Button variant="outline" onClick={() => navigate(RoutePaths.LOGIN)}>
+                Zaloguj się
+              </Button>
+              <Button onClick={() => navigate(RoutePaths.REGISTER)}>Zarejestruj się</Button>
+            </div>
+            <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleMenu}>
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              <span className="sr-only">Toggle menu</span>
+            </Button>
+          </div>
+        )}
       </div>
 
       {/* Mobile menu */}

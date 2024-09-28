@@ -6,7 +6,7 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { useActuatorExampeQuery } from '@/api/query/actuatorExampleQuery.ts';
 import { useToast } from '@/hooks/use-toast.ts';
-import UnauthorizedTopBar from '@/features/top-bar/unauthorized-top-bar.tsx';
+import TopBar from '@/features/top-bar/top-bar.tsx';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 
 interface CarouselText {
@@ -61,7 +61,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <UnauthorizedTopBar />
+        <TopBar />
       </header>
       <main className="w-full">
         <div className="relative mb-8">
