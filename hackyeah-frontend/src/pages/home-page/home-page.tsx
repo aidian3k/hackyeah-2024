@@ -6,6 +6,7 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { useActuatorExampeQuery } from '@/api/query/actuatorExampleQuery.ts';
 import { useToast } from '@/hooks/use-toast.ts';
+import TopBar from '@/features/top-bar/top-bar.tsx';
 
 const universities = [
   'Harvard University',
@@ -21,6 +22,8 @@ const universities = [
   'National University of Singapore',
   'Peking University'
 ];
+
+const bgImagesPrefix: string = '/images/home-page/note';
 
 export default function HomePage() {
   const { data, isError, error } = useActuatorExampeQuery({});
@@ -40,7 +43,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-14 items-center">NAVBAR</div>
+        <TopBar />
       </header>
       <main className="w-full">
         <div className="relative mb-8">
@@ -52,12 +55,15 @@ export default function HomePage() {
                     <div
                       className="absolute inset-0 bg-cover bg-center"
                       style={{
-                        backgroundImage: `url(/images/home-page/note-${index + 1}.jpg)`
+                        backgroundImage: `url(${bgImagesPrefix}-${index + 1}.jpg)`
                       }}
                     ></div>
                     <div className="absolute inset-0 bg-black/50" />
                     <div className="absolute inset-x-0 top-[20%] md:top-1/3 flex items-center justify-center">
-                      <h2 className="text-7xl font-bold text-white text-center">Przekazuj wiedzę,<br/> odbieraj wiedzę</h2>
+                      <h2 className="text-7xl font-bold text-white text-center">
+                        Przekazuj wiedzę,
+                        <br /> odbieraj wiedzę
+                      </h2>
                     </div>
                   </div>
                 </CarouselItem>
@@ -75,7 +81,11 @@ export default function HomePage() {
                   <TabsTrigger value="Inne">Inne</TabsTrigger>
                 </TabsList>
               </Tabs>
-              <Input size={222}  className="w-full max-w-2xl bg-white/90 backdrop-blur rounded-tl-none" placeholder="Search universities..." />
+              <Input
+                size={222}
+                className="w-full bg-background max-w-2xl backdrop-blur rounded-tl-none"
+                placeholder="Search universities..."
+              />
             </div>
           </div>
         </div>
