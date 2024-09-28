@@ -6,7 +6,7 @@ const MaterialTile = material => {
     <div>
       <div>
         <div>
-          <h1>{material.title}</h1>
+          <h1>{material}</h1>
           <h2>{material}</h2>
           <h3>{material}</h3>
         </div>
