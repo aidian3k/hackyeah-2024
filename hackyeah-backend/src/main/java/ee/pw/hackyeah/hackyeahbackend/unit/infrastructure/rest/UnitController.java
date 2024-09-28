@@ -20,10 +20,10 @@ public class UnitController {
     @GetMapping("/all")
     @Cacheable("units-cache")
     public ResponseEntity<UnitOutDTO> handleGetInstitutionUnitsRequest(
-            @RequestParam(name = "institutionId") String institutionId
+        @RequestParam(name = "institutionId") String institutionId
     ) {
         return ResponseEntity.ok(
-                unitService.handleInstitutionUnitsSearch(institutionId)
+            unitService.handleInstitutionUnitsSearch(institutionId)
         );
     }
 }

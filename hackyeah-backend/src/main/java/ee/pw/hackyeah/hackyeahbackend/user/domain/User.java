@@ -84,9 +84,9 @@ public class User extends AppUserDetails {
     private Set<Review> reviews = new HashSet<>();
 
     @OneToMany(
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            mappedBy = "author"
+        fetch = FetchType.LAZY,
+        cascade = CascadeType.ALL,
+        mappedBy = "author"
     )
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

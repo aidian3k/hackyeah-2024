@@ -1,7 +1,6 @@
 package ee.pw.hackyeah.hackyeahbackend.institution.domain;
 
 import ee.pw.hackyeah.hackyeahbackend.learningresource.domain.LearningResource;
-import ee.pw.hackyeah.hackyeahbackend.review.domain.Review;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -10,6 +9,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.HashSet;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -17,9 +18,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "subjects")
@@ -42,9 +40,9 @@ public class Subject {
     private Course course;
 
     @OneToMany(
-            fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            mappedBy = "subject"
+        fetch = FetchType.LAZY,
+        cascade = CascadeType.ALL,
+        mappedBy = "subject"
     )
     @EqualsAndHashCode.Exclude
     @ToString.Exclude

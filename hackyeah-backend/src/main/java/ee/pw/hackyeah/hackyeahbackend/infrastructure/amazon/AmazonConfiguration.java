@@ -64,7 +64,7 @@ class AmazonConfiguration {
                 )
                 .withEndpointConfiguration(
                     new AwsClientBuilder.EndpointConfiguration(
-                            amazonConfigurationProperties.getEndpoint(),
+                        amazonConfigurationProperties.getEndpoint(),
                         Regions.EU_CENTRAL_1.getName()
                     )
                 )
