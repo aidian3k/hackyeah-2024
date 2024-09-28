@@ -57,7 +57,7 @@ export default function HomePage() {
                     ></div>
                     <div className="absolute inset-0 bg-black/50" />
                     <div className="absolute inset-x-0 top-[20%] md:top-1/3 flex items-center justify-center">
-                      <h2 className="text-7xl font-bold text-white text-center">Important Info {index + 1}</h2>
+                      <h2 className="text-7xl font-bold text-white text-center">Przekazuj wiedzę,<br/> odbieraj wiedzę</h2>
                     </div>
                   </div>
                 </CarouselItem>
@@ -67,7 +67,7 @@ export default function HomePage() {
             <CarouselNext className="right-4" />
           </Carousel>
           <div className="absolute inset-x-0 bottom-1/3 flex flex-col justify-center items-center">
-            <div className="mx-auto min-w-96">
+            <div className="mx-auto min-w-96 px-5">
               <Tabs defaultValue="Studia" onValueChange={setActiveCategory}>
                 <TabsList className="rounded-b-none">
                   <TabsTrigger value="Studia">Studia</TabsTrigger>
@@ -75,7 +75,7 @@ export default function HomePage() {
                   <TabsTrigger value="Inne">Inne</TabsTrigger>
                 </TabsList>
               </Tabs>
-              <Input className="w-full max-w-2xl bg-white/90 backdrop-blur rounded-tl-none" placeholder="Search universities..." />
+              <Input size={222}  className="w-full max-w-2xl bg-white/90 backdrop-blur rounded-tl-none" placeholder="Search universities..." />
             </div>
           </div>
         </div>
