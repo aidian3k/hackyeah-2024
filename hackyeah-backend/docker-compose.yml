@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  database:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=hackyeah
+      - POSTGRES_PASSWORD=hackyeah
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+  backend:
+    image: hackyeah-backend:latest
+    depends_on:
+      database:
+        condition: service_started
+      s3mock:
+        condition: service_started
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+    environment:
+      - DATABASE_URL=jdbc:postgresql://database:5432/hackyeah
+      - DATABASE_USER=hackyeah
+      - DATABASE_PASSWORD=hackyeah
+      - SPRING_PROFILES_ACTIVE=local
+      - AMAZON_S3_ENDPOINT=http://s3mock:9000
+  s3mock:
+    image: adobe/s3mock:latest
+    environment:
+      - initialBuckets=UPLOAD_BUCKET
+    ports:
+      - "9090:9090"
+      - "9191:9191"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

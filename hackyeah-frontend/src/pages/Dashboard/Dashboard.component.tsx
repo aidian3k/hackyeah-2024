@@ -1,3 +1,6 @@
+import { Plus } from "lucide-react"
+
+import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Tree from "@/components/tree";
 
@@ -12,19 +15,32 @@ const Dashboard = () => {
     }, [data]);
 
     return (
-    <div className="flex justify-center pt-5 border rounded h-4/5 w-4/5 m-5">
-      <Tabs defaultValue="mine" className="flex flex-col justify-center w-full">
-        <div className="flex justify-center"><TabsList>
-    <TabsTrigger value="mine">Moje notatki</TabsTrigger>
-    <TabsTrigger value="bought">Wymienione notatki</TabsTrigger>
-  </TabsList></div>
-  
-  <TabsContent value="mine" className="flex flex-col justify-center"><Tree /></TabsContent>
-  <TabsContent value="bought" className="flex flex-col justify-center"><Tree /></TabsContent>
-</Tabs>
-
+      <div className="flex w-full border rounded m-5">
+        <Tabs defaultValue="mine" className="pt-5 w-full">
+          <div className="flex justify-center pb-5">
+            <TabsList>
+              <TabsTrigger value="mine">Moje notatki</TabsTrigger>
+              <TabsTrigger value="bought">Wymienione notatki</TabsTrigger>
+            </TabsList>
+          </div>
+          <hr />
+          
+          <TabsContent value="mine">
+            <div className="flex justify-between mr-5">
+              <Tree />
+              <Button size="icon" className="m-5">
+                <Plus className="h-4 w-4" />
+              </Button>
+            </div>
+            
+          </TabsContent>
+          
+          <TabsContent value="bought">
+            <Tree />
+          </TabsContent>
+        </Tabs>
       </div>
-    )
+    );
 }
 
 export default Dashboard;
