@@ -1,5 +1,6 @@
 export enum RoutePaths {
   MAIN_PAGE = '/home',
   LOGIN = '/auth/login',
-  REGISTER = '/auth/register'
+  REGISTER = '/auth/register',
+  DASHBOARD = '/auth/dashboard'
 }
