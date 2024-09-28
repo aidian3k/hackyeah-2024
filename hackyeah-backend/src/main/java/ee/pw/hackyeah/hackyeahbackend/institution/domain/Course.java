@@ -42,5 +42,5 @@ public class Course {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     @Builder.Default
-    private Set<Course> courses = new HashSet<>();
+    private Set<Subject> subjects = new HashSet<>();
 }

@@ -3,6 +3,7 @@ import LoginForm from './LoginForm/LoginForm.component';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Select } from '@/components/ui/select';
+import TopBar from '@/features/top-bar/top-bar.tsx';
 
 const LoginPage = () => {
   // const { login, isAuthenticated } = useAuth0();
@@ -12,18 +13,20 @@ const LoginPage = () => {
   // }
 
   return (
-    <div className="w-full h-full flex justify-center items-center mt-10">
+    <>
+      <TopBar />
+      <div className="w-full h-full flex justify-center items-center mt-10">
         <Card className="w-[500px]">
           <CardHeader>
-              <CardTitle>Zaloguj się</CardTitle>
-              <CardDescription>Zaloguj się, aby przegladać materiały.</CardDescription>
+            <CardTitle>Zaloguj się</CardTitle>
+            <CardDescription>Zaloguj się, aby przegladać materiały.</CardDescription>
           </CardHeader>
           <CardContent>
-              <LoginForm />
+            <LoginForm />
           </CardContent>
         </Card>
-    </div>
-   
+      </div>
+    </>
   );
 };
 
