@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 
 @Configuration
@@ -81,14 +80,10 @@ public class SecurityConfiguration {
                 .accessDeniedHandler(
                     (request, response, accessDeniedException) -> {
                         response.setStatus(HttpStatus.FORBIDDEN.value());
-                        new HttpStatusEntryPoint(HttpStatus.FORBIDDEN);
                     }
                 )
-                .authenticationEntryPoint(
-                    (request, response, authException) -> {
-                        response.setStatus(HttpStatus.UNAUTHORIZED.value());
-                        new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED);
-                    }
+                .authenticationEntryPoint((request, response, authException) ->
+                    response.setStatus(HttpStatus.UNAUTHORIZED.value())
                 )
         );
 
@@ -99,7 +94,7 @@ public class SecurityConfiguration {
         );
 
         httpSecurity.authorizeHttpRequests(requestMatcherRegistry ->
-            requestMatcherRegistry.anyRequest().authenticated()
+            requestMatcherRegistry.anyRequest().permitAll()
         );
 
         return httpSecurity.build();

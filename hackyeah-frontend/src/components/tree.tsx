@@ -109,7 +109,7 @@ const Tree = ({}) => {
       }
     
       return (
-        <div className="m-5 ">
+        <div className="m-5">
             <TreeNode node={categoryTree} path={[]} level={0} />
         </div>
       )

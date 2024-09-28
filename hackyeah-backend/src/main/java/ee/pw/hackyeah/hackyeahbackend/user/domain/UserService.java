@@ -23,8 +23,8 @@ public class UserService {
                 "User with email " +
                 userRegistrationInput.email() +
                 " already exists",
-                    new IllegalArgumentException(),
-                    HttpStatus.BAD_REQUEST
+                new IllegalArgumentException(),
+                HttpStatus.BAD_REQUEST
             );
         }
 
