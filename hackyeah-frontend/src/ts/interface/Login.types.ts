@@ -3,4 +3,4 @@ export type LoginFormInputs = {
   password: string;
 };
 
-export type LoginResponse = {}
+export type LoginResponse = {};

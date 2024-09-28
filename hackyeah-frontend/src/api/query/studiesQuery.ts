@@ -10,7 +10,7 @@ export const useGetStudies = (params: AcademicInstitutionsQueryParams) => {
     queryFn: async () => {
       const filters = {
         name: params.name
-      }
+      };
       const queryParams: any = {
         filters: JSON.stringify(filters)
       };

@@ -12,18 +12,19 @@ const LoginPage = () => {
   // }
 
   return (
-    <div className="w-full h-full flex justify-center items-center mt-10">
-        <Card className="w-[500px]">
-          <CardHeader>
-              <CardTitle>Zaloguj się</CardTitle>
-              <CardDescription>Zaloguj się, aby przegladać materiały.</CardDescription>
-          </CardHeader>
-          <CardContent>
-              <LoginForm />
-          </CardContent>
-        </Card>
+    <div className="w-full h-screen flex justify-center items-center" style={{
+      backgroundImage: `url(/images/home-page/note-1.jpg)`
+    }}>
+      <Card className="w-[500px]">
+        <CardHeader>
+          <CardTitle>Zaloguj się</CardTitle>
+          <CardDescription>Zaloguj się, aby przegladać materiały.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <LoginForm />
+        </CardContent>
+      </Card>
     </div>
-   
   );
 };
 

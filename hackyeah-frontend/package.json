@@ -10,6 +10,9 @@
     "preview": "vite preview",
     "format": "npx prettier --write {**/*,*}.{ts,tsx,js,html,json}"
   },
+  "proxy": {
+    "/api": "http://localhost:8080"
+  },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-accordion": "^1.2.0",

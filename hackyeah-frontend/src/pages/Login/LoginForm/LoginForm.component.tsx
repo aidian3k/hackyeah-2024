@@ -23,7 +23,7 @@ const LoginForm = () => {
   } = useForm<LoginFormInputs>({
     resolver: zodResolver(loginSchema)
   });
-  const { mutate: handleLogin, isSuccess, isError, error  } = useLoginUser();
+  const { mutate: handleLogin, isSuccess, isError, error } = useLoginUser();
 
   const onSubmit = (data: LoginFormInputs) => {
     console.log(data);
@@ -35,7 +35,7 @@ const LoginForm = () => {
     if (isSuccess) {
       navigate(RoutePaths.MAIN_PAGE);
     }
-  }, [isSuccess])
+  }, [isSuccess]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

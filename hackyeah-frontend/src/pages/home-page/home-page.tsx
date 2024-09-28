@@ -8,6 +8,7 @@ import { useActuatorExampeQuery } from '@/api/query/actuatorExampleQuery.ts';
 import { useToast } from '@/hooks/use-toast.ts';
 import TopBar from '@/features/top-bar/top-bar.tsx';
 import UniversitiesAutocomplete from '@/features/common/UniversitiesAutocomplete/UniversitiesAutocomplete.component';
+import MainPageFilters from './main-page-filters/main-page-filters.component';
 
 const universities = [
   'Harvard University',
@@ -74,8 +75,6 @@ export default function HomePage() {
             <CarouselNext className="right-4" />
           </Carousel>
           <div className="absolute inset-x-0 bottom-1/3 flex flex-col justify-center items-center">
-          <UniversitiesAutocomplete />
-
             <div className="mx-auto min-w-96">
               <Tabs defaultValue="Studia" onValueChange={setActiveCategory}>
                 <TabsList className="rounded-b-none">
@@ -91,6 +90,9 @@ export default function HomePage() {
               />
             </div>
           </div>
+        </div>
+        <div className="absolute inset-x-0 bottom-1/3 flex flex-col justify-center items-center">
+          <MainPageFilters />
         </div>
         <div className="container mx-auto px-4 py-8 relative -top-56">
           <Card className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 p-5">
