@@ -4,14 +4,17 @@ import AppRoutes from './router/Routes.component';
 import store from './store/store';
 import { Provider } from 'react-redux';
 import { ToastProvider } from '@/components/ui/toast.tsx';
+import { ThemeProvider } from '@/components/theme-provider.tsx';
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <ToastProvider>
-          <AppRoutes />
-        </ToastProvider>
+        <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+          <ToastProvider>
+            <AppRoutes />
+          </ToastProvider>
+        </ThemeProvider>
       </Provider>
     </QueryClientProvider>
   );
