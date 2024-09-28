@@ -5,9 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 class HackYeahBackendApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(HackYeahBackendApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(HackYeahBackendApplication.class, args);
+    }
 }
