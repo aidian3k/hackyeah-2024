@@ -19,10 +19,11 @@ const AppRoutes: FC = () => {
         <Route path="/auth">
           <Route path={RoutePaths.LOGIN} element={<LoginPage />} />
           <Route path={RoutePaths.REGISTER} element={<RegisterPage />} />
+        </Route>
+        <Route path="/" element={<AuthorizedLayout />}>
+          <Route path={RoutePaths.MAIN_PAGE} element={<HomePage />} />
           <Route path={RoutePaths.DASHBOARD} element={<Dashboard />} />
         </Route>
-        <Route path="/" element={<AuthorizedLayout />}></Route>
-        <Route path={RoutePaths.MAIN_PAGE} element={<HomePage />} />
       </Routes>
     </BrowserRouter>
   );
