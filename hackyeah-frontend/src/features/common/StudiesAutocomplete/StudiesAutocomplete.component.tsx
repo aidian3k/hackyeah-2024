@@ -17,18 +17,20 @@ import { useState } from "react"
 
 import * as React from "react"
 import { Check, ChevronsUpDown } from "lucide-react"
-import { useGetAcademicInstitutions } from "@/api/query/academicInstitutionsQuery"
 import { useFormContext } from "react-hook-form"
+import { useGetUnits } from "@/api/query/unitsQuery"
 
-type UniversisitesAutocompleteProps = {
-  fieldName: string;
+type StudiesAutocompleteProps = {
+  studyFieldName: string;
+  unitFieldName: string;
 }
 
-const UniversitiesAutocomplete: React.FC<UniversisitesAutocompleteProps> = ({ fieldName }) => {
+const StudiesAutocomplete: React.FC<StudiesAutocompleteProps> = ({ studyFieldName, unitFieldName }) => {
     const [open, setOpen] = useState(false)
     const { watch, setValue } = useFormContext();
-    const currentInstitution = watch(fieldName)
-    const { data: academicInstitutions, isLoading, isSuccess } = useGetAcademicInstitutions({ name: currentInstitution.name })
+    const currentUnit = watch(unitFieldName)
+    const currentStudy = watch(studyFieldName)
+    const { data: units, isLoading, isSuccess } = useGetStudies({ unitId: currentUnit.uid })
    
     return (
       <Popover open={open} onOpenChange={setOpen}>
@@ -39,34 +41,34 @@ const UniversitiesAutocomplete: React.FC<UniversisitesAutocompleteProps> = ({ fi
             aria-expanded={open}
             className="w-[200px] justify-between"
           >
-            { currentInstitution && isSuccess
-              ? academicInstitutions.institutions.find((academicInstitutions) => academicInstitutions.name === currentInstitution.name)?.name
-              : "Wybierz uczelnię"}
+            { currentFaculty && isSuccess
+              ? units.units.find((units) => units.name === currentFaculty.name)?.name
+              : "Wybierz wydział"}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-[200px] p-0">
           <Command>
-            <CommandInput placeholder="Wybierz uczelnię" />
+            <CommandInput placeholder="Wybierz wydział" />
             <CommandList>
-              <CommandEmpty>Nie znaleziono uczelni</CommandEmpty>
+              <CommandEmpty>Nie znaleziono wydziału</CommandEmpty>
               <CommandGroup>
-                {isSuccess && academicInstitutions.institutions.map((institution) => (
+                {isSuccess && units.units.map((unit) => (
                   <CommandItem
-                    key={institution.id}
-                    value={institution.name}
+                    key={unit.uid}
+                    value={unit.name}
                     onSelect={(currentValue) => {
-                      setValue(fieldName, currentValue === institution.name ? "" : currentValue)
+                      setValue(unitFieldName, currentValue === unit.name ? "" : currentValue)
                       setOpen(false)
                     }}
                   >
                     <Check
                       className={cn(
                         "mr-2 h-4 w-4",
-                        currentInstitution.name === institution.name ? "opacity-100" : "opacity-0"
+                        currentFaculty.name === unit.name ? "opacity-100" : "opacity-0"
                       )}
                     />
-                    {institution.name}
+                    {unit.name}
                   </CommandItem>
                 ))}
               </CommandGroup>
@@ -77,4 +79,4 @@ const UniversitiesAutocomplete: React.FC<UniversisitesAutocompleteProps> = ({ fi
     )
 }
 
-export default UniversitiesAutocomplete;
+export default StudiesAutocomplete;
