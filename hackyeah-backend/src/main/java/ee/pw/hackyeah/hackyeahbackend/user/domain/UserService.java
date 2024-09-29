@@ -3,6 +3,7 @@ package ee.pw.hackyeah.hackyeahbackend.user.domain;
 import ee.pw.hackyeah.hackyeahbackend.infrastructure.exception.GenericAppException;
 import ee.pw.hackyeah.hackyeahbackend.user.application.in.UserRegistrationInput;
 import ee.pw.hackyeah.hackyeahbackend.user.application.out.UserRegistrationResponse;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -48,6 +49,11 @@ public class UserService {
             .email(registeredUser.getLastName())
             .nickName(registeredUser.getNickName())
             .build();
+    }
+
+    @Transactional
+    public User saveUser(User user) {
+        return userRepository.save(user);
     }
 
     public User getCurrentUser() {

@@ -1,6 +1,7 @@
 package ee.pw.hackyeah.hackyeahbackend.media.domain.service;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import ee.pw.hackyeah.hackyeahbackend.media.domain.Media;
 import ee.pw.hackyeah.hackyeahbackend.media.domain.MediaType;
@@ -8,8 +9,12 @@ import ee.pw.hackyeah.hackyeahbackend.media.domain.repository.MediaRepository;
 import ee.pw.hackyeah.hackyeahbackend.user.domain.User;
 import ee.pw.hackyeah.hackyeahbackend.user.domain.UserService;
 import jakarta.transaction.Transactional;
+import java.net.URL;
+import java.time.Clock;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +30,7 @@ public class MediaService {
     private final MediaRepository mediaRepository;
     private final UserService userService;
     private final AmazonS3 amazonS3;
+    private final Clock clock;
 
     @Value("${amazon.s3.upload-bucket-name}")
     private String uploadBucketName;
@@ -85,6 +91,20 @@ public class MediaService {
             file.getInputStream(),
             metadata
         );
+    }
+
+    public Set<URL> getDownloadMediaU(Collection<Media> media) {
+        return media
+            .stream()
+            .map(medium ->
+                amazonS3.generatePresignedUrl(
+                    new GeneratePresignedUrlRequest(
+                        uploadBucketName,
+                        medium.getObjectKey()
+                    )
+                )
+            )
+            .collect(Collectors.toSet());
     }
 
     private String generateUniqueFileName(

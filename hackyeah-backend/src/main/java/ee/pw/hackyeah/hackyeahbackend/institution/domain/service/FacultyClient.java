@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
     url = "https://polon.nauka.gov.pl/opi-ws/api/institutions"
 )
 interface FacultyClient {
-
     @GetMapping("/{institutionId}/units")
     PolonInstitutionFacultyDTO handleGetInstitutionFacultiesRequest(
         @PathVariable("institutionId") String institutionId
