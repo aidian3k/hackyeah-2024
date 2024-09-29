@@ -18,22 +18,22 @@ interface CarouselText {
 }
 
 const alternativeMaterialMock = {
-    author: {
-        name: 'Cezary Skorupski',
-        avatarUrl:
-            'https://media.licdn.com/dms/image/v2/D4D03AQHRyjS_ulUnbQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1698778439429?e=1733356800&v=beta&t=jeyB5fH9ZQhxYSAkmoGVflCJ2wMzssESOQ4NutWha4E'
-    },
-    title: 'Uprawnienia w systemach operacyjnych',
-    lastUpdated: '03.2024',
-    rating: 3,
-    downloads: 3000,
-    description:
-        'Notatki z sieci komputerowych zawierające najważniejsze informacje z wykładów i ćwiczeń. Przygotowane przez studentów informatyki.',
-    fileComposition: {
-        video: 5,
-        image: 1,
-        text: 30
-    }
+  author: {
+    name: 'Cezary Skorupski',
+    avatarUrl:
+      'https://media.licdn.com/dms/image/v2/D4D03AQHRyjS_ulUnbQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1698778439429?e=1733356800&v=beta&t=jeyB5fH9ZQhxYSAkmoGVflCJ2wMzssESOQ4NutWha4E'
+  },
+  title: 'Uprawnienia w systemach operacyjnych',
+  lastUpdated: '03.2024',
+  rating: 3,
+  downloads: 3000,
+  description:
+    'Notatki z sieci komputerowych zawierające najważniejsze informacje z wykładów i ćwiczeń. Przygotowane przez studentów informatyki.',
+  fileComposition: {
+    video: 5,
+    image: 1,
+    text: 30
+  }
 };
 
 const bgImagesPrefix: string = '/images/home-page/note';

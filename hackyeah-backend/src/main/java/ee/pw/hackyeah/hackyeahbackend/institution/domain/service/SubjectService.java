@@ -8,6 +8,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class SubjectService {
@@ -20,9 +22,20 @@ public class SubjectService {
         String courseId,
         String subjectName
     ) {
-        Course course = courseRepository
-            .findById(courseId)
-            .orElseThrow(() -> new IllegalStateException("Course not found"));
+        Course course;
+        Optional<Course> courseOptional = courseRepository
+            .findById(courseId);
+
+        if(courseOptional.isEmpty()) {
+            course = courseRepository.save(
+                Course
+                    .builder()
+                    .id(courseId)
+                    .build()
+            );
+        } else {
+            course = courseOptional.get();
+        }
 
         Subject subject = Subject
             .builder()
