@@ -7,5 +7,6 @@ export enum RoutePaths {
   ABOUT = '/about-us',
   FAQ = '/faq',
   CONTACT = '/contact',
-  TOKEN_MANAGEMENT = '/tokens'
+  TOKEN_MANAGEMENT = '/tokens',
+  UPLOAD_LEARNING_RESOURCE = '/learning-resource/create'
 }
