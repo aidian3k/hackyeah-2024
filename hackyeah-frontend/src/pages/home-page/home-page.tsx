@@ -16,6 +16,7 @@ interface CarouselText {
 }
 import UniversitiesAutocomplete from '@/features/common/UniversitiesAutocomplete/UniversitiesAutocomplete.component';
 import MainPageFilters from './main-page-filters/main-page-filters.component';
+import MaterialTile from '@/features/MaterialTile/MaterialTile.component';
 
 const universities = [
   'Harvard University',
@@ -30,6 +31,54 @@ const universities = [
   'University of Chicago',
   'National University of Singapore',
   'Peking University'
+];
+
+const materialMock = [
+  {
+    title: 'siema',
+    subject: 'siema',
+    author: 'siema siema',
+    date: '03.2024',
+    grade: 3.5,
+    used: 1762,
+    descr: 'bla bla bla',
+    dataTypes: {
+      video: 2,
+      pdf: 3,
+      written: 4,
+      call: 0
+    }
+  },
+  {
+    title: 'siema',
+    subject: 'siema',
+    author: 'siema siema',
+    date: '03.2024',
+    grade: 3.5,
+    used: 1762,
+    descr: 'bla bla bla',
+    dataTypes: {
+      video: 2,
+      pdf: 3,
+      written: 4,
+      call: 0
+    }
+  },
+  {
+    title: 'siema',
+    subject: 'siema',
+    author: 'siema siema',
+    date: '03.2024',
+    grade: 3.5,
+    used: 1762,
+    descr: 'bla bla bla',
+    dataTypes: {
+      video: 2,
+      pdf: 3,
+      written: 4,
+      call: 0
+    }
+  }
 ];
 
 const bgImagesPrefix: string = '/images/home-page/note';
@@ -125,6 +174,11 @@ export default function HomePage() {
               <MainPageFilters />
             </div>
           </div>
+        </div>
+        <div className="flex justify-evenly basis-[350px] flex-wrap">
+          {materialMock.map(elem => (
+            <MaterialTile material={elem} />
+          ))}
         </div>
       </main>
       <Footer />
