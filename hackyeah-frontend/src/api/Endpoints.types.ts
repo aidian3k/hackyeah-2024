@@ -3,5 +3,6 @@ export enum Endpoints {
   ACADEMIC_INSTITUTIONS = '/institution',
   UNITS = '/unit/all',
   CURRENT_USER_INFO = '/auth/currentUserInfo',
-  STUDIES = '/course/all'
+  STUDIES = '/course/all',
+  LEARNING_RESOURCES = '/learning-resources/free',
 }

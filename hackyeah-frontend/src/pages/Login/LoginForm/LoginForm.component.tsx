@@ -14,8 +14,8 @@ import {useDispatch} from "react-redux";
 import {login} from "@/store/user/user.slice.ts";
 
 const loginSchema = z.object({
-    email: z.string().email('Wprowadź prawidłowy adres e-mail'),
-    password: z.string().min(6, 'Hasło musi mieć co najmniej 6 znaków')
+  email: z.string().email('Wprowadź prawidłowy adres e-mail'),
+  password: z.string()
 });
 
 const LoginForm = () => {
