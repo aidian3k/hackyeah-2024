@@ -52,8 +52,8 @@ public class UserService {
 
     public User getCurrentUser() {
         return (User) SecurityContextHolder
-                .getContext()
-                .getAuthentication()
-                .getPrincipal();
+            .getContext()
+            .getAuthentication()
+            .getPrincipal();
     }
 }

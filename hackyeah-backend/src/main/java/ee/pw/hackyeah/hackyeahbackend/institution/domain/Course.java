@@ -30,7 +30,12 @@ public class Course {
     @Id
     private String id;
 
+    private String courseId;
     private String name;
+    private String level;
+    private String profile;
+    private String title;
+    private String forms;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "faculty_id")

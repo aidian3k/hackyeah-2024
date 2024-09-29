@@ -41,7 +41,7 @@ const Tree = ({}) => {
   }, []);
 
   const TreeNode: React.FC<{ node: TreeNode; path: string[]; level: number }> = ({ node, path, level }) => {
-    const [isExpanded, setIsExpanded] = useState(level < 2);
+    const [isExpanded, setIsExpanded] = useState(true);
     const hasChildren = Object.keys(node).length > 0;
     const singleChild = hasChildren && Object.keys(node).length === 1;
 
@@ -89,7 +89,7 @@ const Tree = ({}) => {
   };
 
   return (
-    <div className="m-5">
+    <div className="p-5">
       <TreeNode node={categoryTree} path={[]} level={0} />
     </div>
   );
