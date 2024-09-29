@@ -27,7 +27,6 @@ public class LearningResourceController {
 
     private final LearningResourceService learningResourceService;
 
-    @PreAuthorize("#learningResourceService.getLearningResourceBoughtForSubjectId(#subjectId)")
     @GetMapping("/learning-resource/{subjectId}")
     public ResponseEntity<Set<LearningResourceBoughtDTO>> handleLearningResourcesBought(
         @RequestBody Long subjectId
