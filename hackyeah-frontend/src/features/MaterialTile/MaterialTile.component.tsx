@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 
 const MaterialTile = material => {
   material = material.material;
-  console.log(material.descr);
 
   return (
     <Card className="w-[350px] border-[#16a34a] overflow-hidden relative mb-5 mx-5">

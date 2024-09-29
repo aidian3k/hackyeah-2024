@@ -173,6 +173,7 @@ export default function HomePage() {
                   size={300}
                   className="rounded-r-none w-full max-w-2xl bg-background backdrop-blur rounded-tl-none h-16"
                   placeholder="Wpisz wyszukiwaną frazę..."
+                  {...formMethods.register('subject')}
                 />
                 <Button className={'rounded-l-none h-16 group'} size={'lg'} type="submit">
                   <MagnifyingGlassIcon className="mr-2 size-4 group-hover:size-5 transition-all duration-200" />
