@@ -1,3 +1,5 @@
+import {UserInfo} from "@/ts/interface/User.ts";
+
 export type LearningResourcesFilterInputs = {
   subject?: string;
   institutionId?: string;
@@ -30,5 +32,6 @@ export type Resource = {
   numberOfPhotos: number;
   numberOfVideos: number;
   numberOfPdfs: number;
+  author: UserInfo;
   otherMaterials: number;
 }
