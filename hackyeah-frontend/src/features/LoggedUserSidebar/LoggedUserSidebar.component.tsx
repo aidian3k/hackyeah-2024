@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { User, PlusCircle, Coins, Settings, LogOut, GraduationCap, School, Briefcase, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -21,7 +23,7 @@ export default function LoggedUserSidebar({ username, tokenCount }: LoggedUserSi
   const handleOptionClick = (option: string, path?: string) => {
     setSelectedOption(option);
     if (path) {
-      navigate(path); // Navigate to the provided path
+      navigate(path);
     }
   };
 
@@ -36,9 +38,9 @@ export default function LoggedUserSidebar({ username, tokenCount }: LoggedUserSi
         <TooltipTrigger asChild>
           <Button
             variant="ghost"
-            onClick={() => handleOptionClick(option, path)} // Pass the option and path to handle navigation
-            className={`w-full justify-start ${isCollapsed ? 'px-2' : ''} hover:bg-gray-200 transition-colors ${
-              selectedOption === option ? 'bg-blue-100' : ''
+            onClick={() => handleOptionClick(option, path)}
+            className={`w-full justify-start ${isCollapsed ? 'px-2' : ''} hover:bg-primary transition-colors ${
+              selectedOption === option ? 'bg-primary-foreground' : ''
             }`}
           >
             {icon}
@@ -51,11 +53,11 @@ export default function LoggedUserSidebar({ username, tokenCount }: LoggedUserSi
   );
 
   const SectionTitle: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-    <h3 className={`text-sm font-semibold text-gray-500 ${isCollapsed ? 'sr-only' : 'mb-2'}`}>{children}</h3>
+    <h3 className={`text-sm font-semibold ${isCollapsed ? 'sr-only' : 'mb-2'}`}>{children}</h3>
   );
 
   return (
-    <div className={`flex flex-col h-screen bg-gray-100 text-gray-800 transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-64'}`}>
+    <div className={`flex flex-col h-screen bg-background transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-64'}`}>
       {/* Logo and App Name */}
       <div className="p-4 border-b border-gray-200 flex justify-between items-center">
         <div className="flex items-center space-x-2">

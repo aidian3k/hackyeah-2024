@@ -1,64 +1,68 @@
-import { useEffect, useState } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { useActuatorExampeQuery } from '@/api/query/actuatorExampleQuery.ts';
-import { useToast } from '@/hooks/use-toast.ts';
+import {useEffect, useState} from 'react';
+import {Card, CardContent} from '@/components/ui/card';
+import {Input} from '@/components/ui/input';
+import {Button} from '@/components/ui/button';
+import {Tabs, TabsList, TabsTrigger} from '@/components/ui/tabs';
+import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from '@/components/ui/carousel';
+import {useActuatorExampeQuery} from '@/api/query/actuatorExampleQuery.ts';
+import {useToast} from '@/hooks/use-toast.ts';
 import TopBar from '@/features/top-bar/top-bar.tsx';
-import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import {MagnifyingGlassIcon} from '@radix-ui/react-icons';
+import Footer from "@/features/footer/footer.tsx";
 
 interface CarouselText {
-  title: string;
-  subtitle: string;
+    title: string;
+    subtitle: string;
 }
 import UniversitiesAutocomplete from '@/features/common/UniversitiesAutocomplete/UniversitiesAutocomplete.component';
 import MainPageFilters from './main-page-filters/main-page-filters.component';
 
 const universities = [
-  'Harvard University',
-  'Stanford University',
-  'Massachusetts Institute of Technology',
-  'University of Cambridge',
-  'University of Oxford',
-  'California Institute of Technology',
-  'ETH Zurich',
-  'University College London',
-  'Imperial College London',
-  'University of Chicago',
-  'National University of Singapore',
-  'Peking University'
+    'Harvard University',
+    'Stanford University',
+    'Massachusetts Institute of Technology',
+    'University of Cambridge',
+    'University of Oxford',
+    'California Institute of Technology',
+    'ETH Zurich',
+    'University College London',
+    'Imperial College London',
+    'University of Chicago',
+    'National University of Singapore',
+    'Peking University'
 ];
 
 const bgImagesPrefix: string = '/images/home-page/note';
 
 const carouselTexts: CarouselText[] = [
-  { title: 'Znajdź notatki i zalicz każdy egzamin!', subtitle: 'Przeglądaj i udostępniaj materiały ze swojej uczelni.' },
-  {
-    title: 'Wspólnie budujemy bazę wiedzy!',
-    subtitle: 'Dołącz do społeczności, gdzie studenci dzielą się notatkami i wspierają się w nauce.'
-  },
-  {
-    title: 'Wymieniaj notatki na tokeny i korzystaj z wiedzy innych!',
-    subtitle: 'Za każdą udostępnioną notatkę otrzymujesz jeden token, który pozwala Ci przeglądać i korzystać z notatek innych studentów.'
-  }
+    {
+        title: 'Znajdź notatki i zalicz każdy egzamin!',
+        subtitle: 'Przeglądaj i udostępniaj materiały ze swojej uczelni.'
+    },
+    {
+        title: 'Wspólnie budujemy bazę wiedzy!',
+        subtitle: 'Dołącz do społeczności, gdzie studenci dzielą się notatkami i wspierają się w nauce.'
+    },
+    {
+        title: 'Wymieniaj notatki na tokeny i korzystaj z wiedzy innych!',
+        subtitle: 'Za każdą udostępnioną notatkę otrzymujesz jeden token, który pozwala Ci przeglądać i korzystać z notatek innych studentów.'
+    }
 ];
 
 export default function HomePage() {
-  const { data, isError, error } = useActuatorExampeQuery({});
-  const [activeCategory, setActiveCategory] = useState('Studia');
-  const { toast } = useToast();
+    const {data, isError, error} = useActuatorExampeQuery({});
+    const [activeCategory, setActiveCategory] = useState('Studia');
+    const {toast} = useToast();
 
-  useEffect(() => {
-    if (isError) {
-      toast({
-        variant: 'destructive',
-        title: 'Niedostępność serwera',
-        description: error?.message
-      });
-    }
-  }, [isError]);
+    useEffect(() => {
+        if (isError) {
+            toast({
+                variant: 'destructive',
+                title: 'Niedostępność serwera',
+                description: error?.message
+            });
+        }
+    }, [isError]);
 
   return (
     <div className="min-h-screen bg-background">
