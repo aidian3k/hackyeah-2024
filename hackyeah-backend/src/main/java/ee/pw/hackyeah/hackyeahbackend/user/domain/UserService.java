@@ -62,4 +62,12 @@ public class UserService {
             .getAuthentication()
             .getPrincipal();
     }
+
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email).orElseThrow(() -> GenericAppException.of(
+            "User with id " + email + " not found",
+            new IllegalArgumentException(),
+            HttpStatus.NOT_FOUND
+        ));
+    }
 }

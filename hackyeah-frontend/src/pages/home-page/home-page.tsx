@@ -50,6 +50,10 @@ const universities = [
   'National University of Singapore',
   'Peking University'
 ];
+import MaterialTile from '@/features/MaterialTile/MaterialTile.component';
+import { FormProvider, useForm } from 'react-hook-form';
+import { LearningResourcesFilterInputs } from '@/ts/interface/LearningResource';
+import { useGetLearningMaterials } from '@/api/query/learningResourceQuery';
 
 const materialMock = [
   {
@@ -118,19 +122,20 @@ const carouselTexts: CarouselText[] = [
 ];
 
 export default function HomePage() {
-  const { data, isError, error } = useActuatorExampeQuery({});
   const [activeCategory, setActiveCategory] = useState('Studia');
   const { toast } = useToast();
+  const formMethods = useForm<LearningResourcesFilterInputs>();
 
-  useEffect(() => {
-    if (isError) {
-      toast({
-        variant: 'destructive',
-        title: 'Niedostępność serwera',
-        description: error?.message
-      });
-    }
-  }, [isError]);
+  const { data: learningResources, isLoading, isSuccess } = useGetLearningMaterials({ 
+    institutionId: formMethods.getValues('institutionId'),
+    unitId: formMethods.getValues('unitId'),
+    studyId: formMethods.getValues('studyId'),
+    subject: formMethods.getValues('subject')
+  });
+
+  const onSubmit = (data: LearningResourcesFilterInputs) => {
+    console.log(data);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -163,6 +168,8 @@ export default function HomePage() {
             <CarouselNext className="right-4" />
           </Carousel>
           <div className="absolute inset-x-0 bottom-[200px] flex flex-col gap-10 justify-center items-center">
+          <FormProvider {...formMethods}>
+            <form onSubmit={formMethods.handleSubmit(onSubmit)}>
             <div className="mx-auto min-w-[320px] px-5">
               <Tabs defaultValue="Studia" onValueChange={setActiveCategory}>
                 <TabsList className="rounded-b-none h-fit">
@@ -182,8 +189,9 @@ export default function HomePage() {
                   size={300}
                   className="rounded-r-none w-full max-w-2xl bg-background backdrop-blur rounded-tl-none h-16"
                   placeholder="Wpisz wyszukiwaną frazę..."
+                  {...formMethods.register('subject')}
                 />
-                <Button className={'rounded-l-none h-16 group'} size={'lg'}>
+                <Button className={'rounded-l-none h-16 group'} size={'lg'} type="submit">
                   <MagnifyingGlassIcon className="mr-2 size-4 group-hover:size-5 transition-all duration-200" />
                   Szukaj
                 </Button>
@@ -192,6 +200,8 @@ export default function HomePage() {
             <div className="mx-auto min-w-[320px] px-5">
               <MainPageFilters />
             </div>
+            </form>
+      </FormProvider>
           </div>
         </div>
         <div className="container mx-auto pb-10">

@@ -9,6 +9,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
+import {logout} from "@/store/user/user.slice.ts";
+import {useDispatch} from "react-redux";
 
 export function DropdownForAvatar({
   name,
@@ -21,6 +23,7 @@ export function DropdownForAvatar({
   pictureUrl: string | undefined;
 }) {
   const [isOpen, setIsOpen] = React.useState(false);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -39,7 +42,7 @@ export function DropdownForAvatar({
             <DropdownMenuItem>Ustawienia</DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => setIsOpen(true)}>Wyloguj się</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => {dispatch(logout());setIsOpen(true);}}>Wyloguj się</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </>
