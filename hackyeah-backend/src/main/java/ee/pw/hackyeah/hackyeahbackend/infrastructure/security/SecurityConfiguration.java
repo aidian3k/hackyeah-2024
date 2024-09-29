@@ -83,6 +83,18 @@ public class SecurityConfiguration {
             requestMatcherRegistry
                 .requestMatchers("/api/auth/register")
                 .permitAll();
+            requestMatcherRegistry
+                    .requestMatchers("/api/institution")
+                    .permitAll();
+            requestMatcherRegistry
+                    .requestMatchers("/api/faculty")
+                    .permitAll();
+            requestMatcherRegistry
+                    .requestMatchers("/api/course")
+                    .permitAll();
+            requestMatcherRegistry
+                    .requestMatchers("/api/learning-resources/free")
+                    .permitAll();
         });
 
         httpSecurity.exceptionHandling(httpSecurityExceptionHandlingConfigurer ->
