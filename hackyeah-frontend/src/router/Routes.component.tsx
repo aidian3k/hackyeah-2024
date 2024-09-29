@@ -12,6 +12,7 @@ import AddMaterial from '@/pages/AddMaterial/AddMaterial.component.tsx';
 import AboutUs from '@/pages/about-us/about-us.tsx';
 import FAQView from '@/pages/faq/faq.tsx';
 import TokenManagement from '@/pages/TokenManagement/TokenManagement.component';
+import {Contact} from "lucide-react";
 
 const AppRoutes: FC = () => {
   const { authenticated } = useSelector((state: RootState) => state.user);
@@ -27,6 +28,7 @@ const AppRoutes: FC = () => {
         <Route path={RoutePaths.MAIN_PAGE} element={<HomePage />} />
         <Route path={RoutePaths.ABOUT} element={<AboutUs />} />
         <Route path={RoutePaths.FAQ} element={<FAQView />} />
+        <Route path={RoutePaths.CONTACT} element={<Contact />} />
         <Route path="/" element={<AuthorizedLayout />}>
           <Route path={RoutePaths.DASHBOARD} element={<Dashboard />} />
           <Route path={RoutePaths.TOKEN_MANAGEMENT} element={<TokenManagement />} />
