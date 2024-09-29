@@ -9,6 +9,9 @@ import {LoginFormInputs} from '@/ts/interface/Login.types';
 import {useLoginUser} from '@/api/mutation/LoginMutation';
 import {useNavigate} from 'react-router-dom';
 import {RoutePaths} from '@/router/Routes.types';
+import {useGetCurrentUserInfo} from "@/api/query/userQuery.ts";
+import {useDispatch} from "react-redux";
+import {login} from "@/store/user/user.slice.ts";
 
 const loginSchema = z.object({
   email: z.string().email('Wprowadź prawidłowy adres e-mail'),
@@ -23,8 +26,11 @@ const LoginForm = () => {
     } = useForm<LoginFormInputs>({
         resolver: zodResolver(loginSchema)
     });
+    const currentUserInfo = useGetCurrentUserInfo();
+
     const {mutate: handleLogin, isSuccess, isError, error} = useLoginUser();
 
+    const dispatch = useDispatch()
     const onSubmit = (data: LoginFormInputs) => {
         console.log(data);
         handleLogin(data);
@@ -33,9 +39,17 @@ const LoginForm = () => {
 
     useEffect(() => {
         if (isSuccess) {
-            navigate(RoutePaths.MAIN_PAGE);
+            currentUserInfo.refetch()
         }
-    }, [isSuccess, isError]);
+    }, [isSuccess]);
+
+    useEffect(() => {
+        if (currentUserInfo.isSuccess) {
+            dispatch(login({...currentUserInfo.data}))
+            navigate(RoutePaths.MAIN_PAGE);
+            console.log(currentUserInfo.data)
+        }
+    }, [currentUserInfo.isSuccess]);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
