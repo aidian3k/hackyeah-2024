@@ -19,7 +19,7 @@ export default function Footer() {
               <Logo />
               {<span className="font-bold text-lg">Dolphinder</span>}
             </Link>
-            <p className="font-bold text-sm">Znajdź materiały dla siebie i zostać ekspertem.</p>
+            <p className="font-bold text-sm">Znajdź materiały dla siebie i zostań ekspertem.</p>
           </div>
 
           <div>
@@ -87,7 +87,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 pt-8 border-t border-gray-200 text-center text-sm">
-          © {new Date().getFullYear()} Nazwa Firmy. Wszelkie prawa zastrzeżone.
+          © {new Date().getFullYear()} Dolphinder. Wszelkie prawa zastrzeżone.
         </div>
       </div>
     </footer>
