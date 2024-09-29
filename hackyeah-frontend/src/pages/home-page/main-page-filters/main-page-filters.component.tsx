@@ -6,20 +6,20 @@ const MainPageFilters = () => {
   
 
   return (
-    <div className="w-full">
+    <div className="mt-10">
       
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            <div className="col-span-1 ">
+          <div className="flex justify-items-start flex-row gap-5">
+            {/* <div className="col-span-1 "> */}
               <UniversitiesAutocomplete fieldName="institutionId" />
-            </div>
+            {/* </div> */}
 
-            <div className="col-span-1">
+            {/* <div className="col-span-1"> */}
               <UnitsAutocomplete institutionFieldName="institutionId" unitFieldName="unitId" />
-            </div>
+            {/* </div> */}
 
-            <div className="col-span-1">
+            {/* <div className="col-span-1"> */}
               <StudiesAutocomplete studyFieldName="studyId" unitFieldName="unitId" />
-            </div>
+            {/* </div> */}
           </div>
         
     </div>

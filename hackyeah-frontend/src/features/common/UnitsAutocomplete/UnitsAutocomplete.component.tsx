@@ -27,7 +27,7 @@ const UnitsAutocomplete: React.FC<FacultiesAutocompleteProps> = ({ institutionFi
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between max-w-full md:max-w-64">
+        <Button variant="outline" role="combobox" aria-expanded={open} className="flex justify-between truncate max-w-full md:max-w-64">
           {currentUnit && isSuccess ? units.units.find(unit => unit.uuid === currentUnit)?.name : 'Wybierz wydział'}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>

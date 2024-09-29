@@ -14,26 +14,11 @@ interface CarouselText {
   title: string;
   subtitle: string;
 }
-import UniversitiesAutocomplete from '@/features/common/UniversitiesAutocomplete/UniversitiesAutocomplete.component';
 import MainPageFilters from './main-page-filters/main-page-filters.component';
 import MaterialTile from '@/features/MaterialTile/MaterialTile.component';
 import { FormProvider, useForm } from 'react-hook-form';
 import { LearningResourcesFilterInputs } from '@/ts/interface/LearningResource';
-
-const universities = [
-  'Harvard University',
-  'Stanford University',
-  'Massachusetts Institute of Technology',
-  'University of Cambridge',
-  'University of Oxford',
-  'California Institute of Technology',
-  'ETH Zurich',
-  'University College London',
-  'Imperial College London',
-  'University of Chicago',
-  'National University of Singapore',
-  'Peking University'
-];
+import { useGetLearningMaterials } from '@/api/query/learningResourceQuery';
 
 const materialMock = [
   {
@@ -104,8 +89,14 @@ export default function HomePage() {
   const { data, isError, error } = useActuatorExampeQuery({});
   const [activeCategory, setActiveCategory] = useState('Studia');
   const { toast } = useToast();
-
   const formMethods = useForm<LearningResourcesFilterInputs>();
+
+  const { data: learningResources, isLoading, isSuccess } = useGetLearningMaterials({ 
+    institutionId: formMethods.getValues('institutionId'),
+    unitId: formMethods.getValues('unitId'),
+    studyId: formMethods.getValues('studyId'),
+    subject: formMethods.getValues('subject')
+  });
 
   useEffect(() => {
     if (isError) {
@@ -189,7 +180,7 @@ export default function HomePage() {
           </div>
         </div>
         <div className="flex justify-evenly basis-[350px] flex-wrap">
-          {materialMock.map(elem => (
+          {isSuccess && learningResources.map(elem => (
             <MaterialTile material={elem} />
           ))}
         </div>
