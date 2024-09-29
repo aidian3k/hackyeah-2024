@@ -32,6 +32,8 @@ public class Faculty {
 
     private String name;
 
+    private String status;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "institution_id")
     @EqualsAndHashCode.Exclude

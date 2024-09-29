@@ -1,7 +1,7 @@
-package ee.pw.hackyeah.hackyeahbackend.unit.infrastructure.rest;
+package ee.pw.hackyeah.hackyeahbackend.institution.infrastructure.rest;
 
-import ee.pw.hackyeah.hackyeahbackend.unit.application.out.UnitOutDTO;
-import ee.pw.hackyeah.hackyeahbackend.unit.domain.service.UnitService;
+import ee.pw.hackyeah.hackyeahbackend.institution.application.out.FacultyOutDTO;
+import ee.pw.hackyeah.hackyeahbackend.institution.domain.service.FacultyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/unit")
-public class UnitController {
+public class FacultyController {
 
-    private final UnitService unitService;
+    private final FacultyService facultyService;
 
     @GetMapping("/all")
     @Cacheable("units-cache")
-    public ResponseEntity<UnitOutDTO> handleGetInstitutionUnitsRequest(
-        @RequestParam(name = "institutionId") String institutionId
+    public ResponseEntity<FacultyOutDTO> handleGetInstitutionFacultiesRequest(
+            @RequestParam(name = "institutionId") String institutionId
     ) {
         return ResponseEntity.ok(
-            unitService.handleInstitutionUnitsSearch(institutionId)
+                facultyService.handleInstitutionUnitsSearch(institutionId)
         );
     }
 }
