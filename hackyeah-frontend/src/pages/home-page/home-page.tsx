@@ -50,7 +50,6 @@ const universities = [
   'National University of Singapore',
   'Peking University'
 ];
-import MainPageFilters from './main-page-filters/main-page-filters.component';
 import MaterialTile from '@/features/MaterialTile/MaterialTile.component';
 import { FormProvider, useForm } from 'react-hook-form';
 import { LearningResourcesFilterInputs } from '@/ts/interface/LearningResource';
