@@ -2,13 +2,12 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import { ModeToggle } from '@/components/mode-toggle.tsx';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { RoutePaths } from '@/router/Routes.types.ts';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store.ts';
 import { UserState } from '@/store/user/user.slice.ts';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar.tsx';
-import AvatarWithName, { DropdownForAvatar } from '@/components/avatar-with-name.tsx';
+import { DropdownForAvatar } from '@/components/avatar-with-name.tsx';
 
 export default function TopBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,9 +28,12 @@ export default function TopBar() {
 
         {/* Center - Navigation as (hidden on mobile) */}
         <nav className="hidden lg:flex space-x-12 justify-self-center">
-          <a href="/dashboard/materials/add" className="text-foreground hover:text-primary duration-200 transition-colors">
+          <Link
+            to={user.authenticated ? RoutePaths.ADD_MATERIAL : RoutePaths.LOGIN}
+            className="text-foreground hover:text-primary duration-200 transition-colors"
+          >
             Dodaj notatkę
-          </a>
+          </Link>
           <Link to={RoutePaths.ABOUT} className="text-foreground hover:text-primary duration-200 transition-colors">
             O nas
           </Link>
