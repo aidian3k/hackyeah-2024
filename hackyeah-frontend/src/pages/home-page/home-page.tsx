@@ -90,7 +90,7 @@ export default function HomePage() {
             <CarouselPrevious className="left-4" />
             <CarouselNext className="right-4" />
           </Carousel>
-          <div className="absolute inset-x-0 bottom-[200px] flex flex-col justify-center items-center">
+          <div className="absolute inset-x-0 bottom-[200px] flex flex-col gap-10 justify-center items-center">
             <div className="mx-auto min-w-[320px] px-5">
               <Tabs defaultValue="Studia" onValueChange={setActiveCategory}>
                 <TabsList className="rounded-b-none h-fit">
@@ -105,7 +105,7 @@ export default function HomePage() {
                   </TabsTrigger>
                 </TabsList>
               </Tabs>
-              <div className={'flex h-fit shadow-2xl shadow-black'}>
+              <div className={'flex h-fit w-fit shadow-2xl shadow-black'}>
                 <Input
                   size={300}
                   className="rounded-r-none w-full max-w-2xl bg-background backdrop-blur rounded-tl-none h-16"
@@ -116,9 +116,9 @@ export default function HomePage() {
                   Szukaj
                 </Button>
               </div>
-              <div className="pt-16">
-                <MainPageFilters />
-              </div>
+            </div>
+            <div className="mx-auto min-w-[320px] px-5">
+              <MainPageFilters />
             </div>
           </div>
         </div>

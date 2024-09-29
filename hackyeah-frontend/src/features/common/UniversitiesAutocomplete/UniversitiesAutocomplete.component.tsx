@@ -27,10 +27,10 @@ const UniversitiesAutocomplete: React.FC<UniversitiesAutocompleteProps> = ({ fie
   const { data: academicInstitutions, isLoading, isSuccess } = useGetAcademicInstitutions({ name: currentInstitution });
 
   return (
-    <div>
+    <div className="w-full">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between">
+          <Button variant="outline" role="combobox" aria-expanded={open} className="flex justify-between truncate max-w-full md:max-w-64">
             {currentInstitution && isSuccess
               ? academicInstitutions?.institutions.find(institution => institution.id === currentInstitution)?.name
               : 'Wybierz uczelnię'}
@@ -38,8 +38,8 @@ const UniversitiesAutocomplete: React.FC<UniversitiesAutocompleteProps> = ({ fie
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-[200px] p-0">
-          <Command>
-            <CommandInput placeholder="Wybierz uczelnię" />
+          <Command className="">
+            <CommandInput className="" placeholder="Wybierz uczelnię" />
             <CommandList>
               <CommandEmpty>Nie znaleziono uczelni</CommandEmpty>
               <CommandGroup>
@@ -53,7 +53,6 @@ const UniversitiesAutocomplete: React.FC<UniversitiesAutocompleteProps> = ({ fie
                         setOpen(false);
                       }}
                     >
-                      <Check className={cn('mr-2 h-4 w-4', currentInstitution === institution.id ? 'opacity-100' : 'opacity-0')} />
                       {institution.name}
                     </CommandItem>
                   ))}

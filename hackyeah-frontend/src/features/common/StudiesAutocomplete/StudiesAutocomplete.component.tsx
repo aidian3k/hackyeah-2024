@@ -8,6 +8,7 @@ import * as React from 'react';
 import { Check, ChevronsUpDown } from 'lucide-react';
 import { useFormContext } from 'react-hook-form';
 import { useGetUnits } from '@/api/query/unitsQuery';
+import { useGetStudies } from '@/api/query/studiesQuery';
 
 type StudiesAutocompleteProps = {
   studyFieldName: string;
@@ -19,43 +20,35 @@ const StudiesAutocomplete: React.FC<StudiesAutocompleteProps> = ({ studyFieldNam
   const { watch, setValue } = useFormContext();
   const currentUnit = watch(unitFieldName);
   const currentStudy = watch(studyFieldName);
-  // const { data: units, isLoading, isSuccess } = useGetStudies({ unitId: currentUnit.uid })
+  const { data: studies, isLoading, isSuccess } = useGetStudies({ institutionUid: currentUnit });
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between">
-          {/* { currentFaculty && isSuccess
-              ? units.units.find((units) => units.name === currentFaculty.name)?.name
-              : "Wybierz wydział"} */}
-          Wybierz kierunek
+        <Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between max-w-full md:max-w-64">
+          {currentStudy && isSuccess ? studies.courses.find(study => study.uid === currentStudy)?.name : 'Wybierz kierunek'}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder="Wybierz wydział" />
+          <CommandInput placeholder="Wybierz kierunek" />
           <CommandList>
             <CommandEmpty>Nie znaleziono kierunku</CommandEmpty>
             <CommandGroup>
-              {/* {isSuccess && units.units.map((unit) => (
+              {isSuccess &&
+                studies.courses.map(course => (
                   <CommandItem
-                    key={unit.uid}
-                    value={unit.name}
-                    onSelect={(currentValue) => {
-                      setValue(unitFieldName, currentValue === unit.name ? "" : currentValue)
-                      setOpen(false)
+                    key={course.uid}
+                    value={course.name}
+                    onSelect={currentValue => {
+                      setValue(studyFieldName, course.uid);
+                      setOpen(false);
                     }}
                   >
-                    <Check
-                      className={cn(
-                        "mr-2 h-4 w-4",
-                        currentFaculty.name === unit.name ? "opacity-100" : "opacity-0"
-                      )}
-                    />
-                    {unit.name}
+                    {course.name}
                   </CommandItem>
-                ))} */}
+                ))}
             </CommandGroup>
           </CommandList>
         </Command>

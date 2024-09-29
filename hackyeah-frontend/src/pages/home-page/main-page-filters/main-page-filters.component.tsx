@@ -16,20 +16,19 @@ const MainPageFilters = () => {
     <div className="w-full">
       <FormProvider {...formMethods}>
         <form onSubmit={formMethods.handleSubmit(onSubmit)}>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-          <div className="col-span-1">
-            <UniversitiesAutocomplete fieldName="institutionId" />
-          </div>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <div className="col-span-1 ">
+              <UniversitiesAutocomplete fieldName="institutionId" />
+            </div>
 
-          <div className="col-span-1">
-            <UnitsAutocomplete institutionFieldName="institutionId" unitFieldName="unitId" />
-          </div>
+            <div className="col-span-1">
+              <UnitsAutocomplete institutionFieldName="institutionId" unitFieldName="unitId" />
+            </div>
 
-          <div className="col-span-1">
-            <StudiesAutocomplete studyFieldName="studyId" unitFieldName="unitId" />
+            <div className="col-span-1">
+              <StudiesAutocomplete studyFieldName="studyId" unitFieldName="unitId" />
+            </div>
           </div>
-        </div>
-
         </form>
       </FormProvider>
     </div>
