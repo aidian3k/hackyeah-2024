@@ -12,7 +12,7 @@ import AddMaterial from '@/pages/AddMaterial/AddMaterial.component.tsx';
 import AboutUs from '@/pages/about-us/about-us.tsx';
 import FAQView from '@/pages/faq/faq.tsx';
 import TokenManagement from '@/pages/TokenManagement/TokenManagement.component';
-import {Contact} from "lucide-react";
+import Contact from "@/pages/contact/contact.tsx";
 
 const AppRoutes: FC = () => {
   const { authenticated } = useSelector((state: RootState) => state.user);
