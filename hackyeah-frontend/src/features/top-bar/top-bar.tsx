@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import { ModeToggle } from '@/components/mode-toggle.tsx';
@@ -8,6 +8,14 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store.ts';
 import { UserState } from '@/store/user/user.slice.ts';
 import { DropdownForAvatar } from '@/components/avatar-with-name.tsx';
+import delfinLogo from '@/assets/delfin.svg';
+
+const Logo = () => (
+  <div className="flex items-center justify-center h-16 w-16">
+    {' '}
+    <img src={delfinLogo} alt="Delfin logo" className="h-full w-full" />
+  </div>
+);
 
 export default function TopBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,9 +28,12 @@ export default function TopBar() {
     <header className="w-full py-4 px-6 bg-background shadow-sm">
       <div className="container mx-auto grid grid-cols-2 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center justify-between">
         {/* Left side - Logo */}
-        <div className="flex-shrink-0 justify-self-start">
+        <div className="flex justify-between items-center">
           <a href="/" className="text-2xl font-bold text-primary">
-            Logo
+            <div className="flex items-center space-x-2">
+              <Logo />
+              {<span className="font-bold text-lg">Dolphinder</span>}
+            </div>
           </a>
         </div>
 
