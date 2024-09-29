@@ -6,7 +6,7 @@ spring:
     password: "${DATABASE_PASSWORD:postgres}"
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
 
 amazon:
   s3:
