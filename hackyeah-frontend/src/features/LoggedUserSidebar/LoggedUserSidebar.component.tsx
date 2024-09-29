@@ -1,19 +1,23 @@
-'use client';
-
 import React, { useState } from 'react';
 import { User, PlusCircle, Coins, Settings, LogOut, GraduationCap, School, Briefcase, ChevronLeft, ChevronRight } from 'lucide-react';
-
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useNavigate } from 'react-router-dom';
 import { RoutePaths } from '@/router/Routes.types.ts';
 
-const Logo = () => <div className="flex items-center justify-center h-8 w-8 bg-blue-500 text-white rounded-full">D</div>;
+import delfinLogo from '@/assets/delfin.svg';
 
 interface LoggedUserSidebarProps {
   username: string;
   tokenCount: number;
 }
+
+const Logo = () => (
+  <div className="flex items-center justify-center h-16 w-16">
+    {' '}
+    <img src={delfinLogo} alt="Delfin logo" className="h-full w-full" />
+  </div>
+);
 
 export default function LoggedUserSidebar({ username, tokenCount }: LoggedUserSidebarProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -58,13 +62,12 @@ export default function LoggedUserSidebar({ username, tokenCount }: LoggedUserSi
 
   return (
     <div className={`flex flex-col h-screen bg-background transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-64'}`}>
-      {/* Logo and App Name */}
-      <div className="p-4 border-b border-gray-200 flex justify-between items-center">
+      <a href="/" className="text-2xl font-bold text-primary">
         <div className="flex items-center space-x-2">
           <Logo />
           {!isCollapsed && <span className="font-bold text-lg">Dolphinder</span>}
         </div>
-      </div>
+      </a>
       <div className="p-4 border-b border-gray-200 flex justify-between items-center">
         {!isCollapsed && <span className="font-semibold">{username}</span>}
         <Button variant="ghost" size="icon" onClick={() => setIsCollapsed(!isCollapsed)} className="ml-auto">

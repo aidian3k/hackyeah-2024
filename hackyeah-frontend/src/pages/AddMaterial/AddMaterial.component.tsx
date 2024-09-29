@@ -1,7 +1,7 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs.tsx";
-import React, { useState } from "react";
-import AddHighSchoolMaterialForm from "@/pages/AddMaterial/AddHighSchoolMaterialForm.component.tsx";
-import AddUniversityMaterialForm from "@/pages/AddMaterial/AddUniversityMaterialForm.component.tsx";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs.tsx';
+import React, { useState } from 'react';
+import AddHighSchoolMaterialForm from '@/pages/AddMaterial/AddHighSchoolMaterialForm.component.tsx';
+import AddUniversityMaterialForm from '@/pages/AddMaterial/AddUniversityMaterialForm.component.tsx';
 
 const AddMaterial = () => {
   const [activeTrigger, setActiveTrigger] = useState('university');
@@ -32,12 +32,10 @@ const AddMaterial = () => {
           <AddHighSchoolMaterialForm />
         </TabsContent>
 
-        <TabsContent value="others">
-          I na chuj tak testujesz
-        </TabsContent>
+        <TabsContent value="others">I na chuj tak testujesz</TabsContent>
       </Tabs>
     </div>
   );
-}
+};
 
 export default AddMaterial;
