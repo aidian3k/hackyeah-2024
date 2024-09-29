@@ -1,104 +1,106 @@
-import { motion } from 'framer-motion';
-import { ArrowRight, BookOpen, Share2, Users } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { BookOpen, Share2, Users } from 'lucide-react';
+import TopBar from '@/features/top-bar/top-bar.tsx';
+import { useNavigate } from 'react-router-dom';
 import { RoutePaths } from '@/router/Routes.types.ts';
-import { Button } from '@/components/ui/button.tsx';
 
-export default function AboutUs() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1
-    }
-  };
+export default function LandingPage() {
+  const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-white">
-      <header className="container mx-auto px-4 py-8">
-        <nav className="flex justify-between items-center">
-          <motion.div initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
-            <Link to={RoutePaths.MAIN_PAGE} className="text-2xl font-bold text-blue-600">
-              NoteShare
-            </Link>
-          </motion.div>
-          <motion.div initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 0.5 }}>
-            <Button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300">
-              Sign Up
+    <div className="flex flex-col min-h-screen">
+      <TopBar />
+      <main className="flex-grow">
+        {/* Sekcja Hero */}
+        <section className="bg-background py-20">
+          <div className="container mx-auto px-4">
+            <div className="text-center">
+              <h1 className="text-4xl font-bold mb-6">Dziel się wiedzą, zaliczaj studia na 5!</h1>
+              <p className="text-xl text-muted-foreground mb-8">
+                Uzyskaj dostęp i dziel się notatkami z innymi studentami. Poszerz swoją wiedzę w interesujących Cię dziedzinach.
+              </p>
+              <div className="flex justify-center gap-4">
+                <Button size="lg" onClick={() => navigate(RoutePaths.REGISTER)}>
+                  Zacznij teraz
+                </Button>
+                <Button size="lg" variant="outline">
+                  Dowiedz się więcej
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Sekcja Funkcje */}
+        <section className="py-20 bg-muted">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center mb-12">Dlaczego nasza platforma?</h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              <FeatureCard
+                icon={<BookOpen className="h-10 w-10" />}
+                title="Dostęp do wysokiej jakości notatek"
+                description="Uzyskaj dostęp do szerokiej gamy wysokiej jakości notatek od swoich rówieśników z różnych przedmiotów."
+              />
+              <FeatureCard
+                icon={<Share2 className="h-10 w-10" />}
+                title="Łatwe udostępnianie"
+                description="Dziel się swoimi notatkami bez wysiłku i pomagaj innym, jednocześnie utrwalając swoją wiedzę."
+              />
+              <FeatureCard
+                icon={<Users className="h-10 w-10" />}
+                title="Nauka w grupie"
+                description="Połącz się z innymi studentami o podobnych zainteresowaniach i uczcie się razem efektywniej."
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Sekcja CTA */}
+        <section className="py-20">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl font-bold mb-6">Gotowy, aby poprawić swoje wyniki?</h2>
+            <p className="text-xl text-muted-foreground mb-8">
+              Dołącz do naszej społeczności uczniów i zacznij dzielić się wiedzą już dziś!
+            </p>
+            <Button size="lg" onClick={() => navigate(RoutePaths.REGISTER)}>
+              Zarejestruj się
             </Button>
-          </motion.div>
-        </nav>
-      </header>
+          </div>
+        </section>
 
-      <main className="container mx-auto px-4 py-12">
-        <motion.section className="text-center mb-16" initial="hidden" animate="visible" variants={containerVariants}>
-          <motion.h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-800" variants={itemVariants}>
-            Share Knowledge, Grow Together
-          </motion.h1>
-          <motion.p className="text-xl text-gray-600 mb-8" variants={itemVariants}>
-            Welcome to NoteShare - Your platform for collaborative learning and knowledge exchange
-          </motion.p>
-          <motion.div variants={itemVariants}>
-            <Link
-              to={RoutePaths.LOGIN}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full inline-flex items-center transition duration-300"
-            >
-              Explore Notes <ArrowRight className="ml-2" />
-            </Link>
-          </motion.div>
-        </motion.section>
-
-        <motion.section className="grid md:grid-cols-3 gap-8 mb-16" initial="hidden" animate="visible" variants={containerVariants}>
-          <motion.div className="bg-white p-6 rounded-lg shadow-lg" variants={itemVariants}>
-            <BookOpen className="text-blue-500 w-12 h-12 mb-4" />
-            <h2 className="text-xl font-semibold mb-2">Access Quality Notes</h2>
-            <p className="text-gray-600">Explore a vast library of user-generated notes on various subjects.</p>
-          </motion.div>
-          <motion.div className="bg-white p-6 rounded-lg shadow-lg" variants={itemVariants}>
-            <Share2 className="text-blue-500 w-12 h-12 mb-4" />
-            <h2 className="text-xl font-semibold mb-2">Share Your Knowledge</h2>
-            <p className="text-gray-600">Contribute your own notes and help others learn from your expertise.</p>
-          </motion.div>
-          <motion.div className="bg-white p-6 rounded-lg shadow-lg" variants={itemVariants}>
-            <Users className="text-blue-500 w-12 h-12 mb-4" />
-            <h2 className="text-xl font-semibold mb-2">Collaborate and Grow</h2>
-            <p className="text-gray-600">Connect with like-minded learners and expand your understanding.</p>
-          </motion.div>
-        </motion.section>
-
-        <motion.section className="text-center" initial="hidden" animate="visible" variants={containerVariants}>
-          <motion.h2 className="text-3xl font-bold mb-4 text-gray-800" variants={itemVariants}>
-            Join Our Community Today
-          </motion.h2>
-          <motion.p className="text-xl text-gray-600 mb-8" variants={itemVariants}>
-            Start sharing your knowledge and learning from others. It's free and easy to get started!
-          </motion.p>
-          <motion.div variants={itemVariants}>
-            <Link
-              to={RoutePaths.REGISTER}
-              className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full inline-flex items-center transition duration-300"
-            >
-              Get Started Now <ArrowRight className="ml-2" />
-            </Link>
-          </motion.div>
-        </motion.section>
+        {/* Sekcja Newsletter */}
+        <section className="py-20 bg-muted">
+          <div className="container mx-auto px-4">
+            <div className="max-w-md mx-auto text-center">
+              <h2 className="text-2xl font-bold mb-4">Bądź na bieżąco</h2>
+              <p className="text-muted-foreground mb-6">
+                Zapisz się do naszego newslettera, aby otrzymywać najnowsze funkcje i porady do nauki.
+              </p>
+              <form className="flex gap-2">
+                <Input type="email" placeholder="Wpisz swój e-mail" className="flex-grow" />
+                <Button type="submit">Subskrybuj</Button>
+              </form>
+            </div>
+          </div>
+        </section>
       </main>
 
-      <footer className="bg-gray-100 py-8 mt-16">
-        <div className="container mx-auto px-4 text-center text-gray-600">
-          <p>&copy; 2024 NoteShare. All rights reserved.</p>
+      <footer className="bg-background py-6">
+        <div className="container mx-auto px-4 text-center text-muted-foreground">
+          <p>&copy; 2024 Aplikacja do dzielenia się notatkami. Wszelkie prawa zastrzeżone.</p>
         </div>
       </footer>
+    </div>
+  );
+}
+
+function FeatureCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
+  return (
+    <div className="bg-background p-6 rounded-lg shadow-md text-center">
+      <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">{icon}</div>
+      <h3 className="text-xl font-semibold mb-2">{title}</h3>
+      <p className="text-muted-foreground">{description}</p>
     </div>
   );
 }
