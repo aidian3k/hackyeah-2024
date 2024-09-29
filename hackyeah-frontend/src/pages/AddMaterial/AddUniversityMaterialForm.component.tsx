@@ -14,7 +14,7 @@ interface AddUniversityMaterialFormProps {}
 
 const AddUniversityMaterialForm: React.FC<AddUniversityMaterialFormProps> = () => {
   const formMethods = useForm<PostLearningResourceDTO>();
-  const { mutate: uploadResource, isError. isSuccess } = useUploadLearningResource();
+  const { mutate: uploadResource, isError, isSuccess, isPending } = useUploadLearningResource();
 
   const onSubmit = async (data: PostLearningResourceDTO) => {
     uploadResource(data);
@@ -57,7 +57,7 @@ const AddUniversityMaterialForm: React.FC<AddUniversityMaterialFormProps> = () =
           <div>
             <Label htmlFor="courseId">Kierunek</Label>
             <div className="w-full">
-              <StudiesAutocomplete unitFieldName={"learningResourceCreationDTO.unitId"} studyFieldName={"earningResourceCreationDTO.unitId"}  />
+              <StudiesAutocomplete unitFieldName={"learningResourceCreationDTO.unitId"} studyFieldName={"learningResourceCreationDTO.courseId"}  />
             </div>
           </div>
 
@@ -100,7 +100,7 @@ const AddUniversityMaterialForm: React.FC<AddUniversityMaterialFormProps> = () =
 
           <div>
             <Button type="submit">
-              {/* {isSubmitting ? "Tworzenie..." : "Utwórz"} */}
+              {isPending ? "Tworzenie..." : "Utwórz"}
             </Button>
           </div>
         </form>
