@@ -7,7 +7,6 @@ import { Provider } from 'react-redux';
 import { ToastProvider } from '@/components/ui/toast.tsx';
 import { ThemeProvider } from '@/components/theme-provider.tsx';
 
-
 function App() {
   return (
     <QueryClientProvider client={queryClient}>

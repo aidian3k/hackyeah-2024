@@ -8,7 +8,7 @@ const MaterialTile = material => {
   console.log(material.descr);
 
   return (
-    <Card className="w-[350px] border-[#16a34a] overflow-hidden relative">
+    <Card className="w-[350px] border-[#16a34a] overflow-hidden relative mb-5 mx-5">
       <CardHeader className=" rounded-t-l grid grid-cols-2 grid-rows-1 bg-[#16a34a] p-4 clip-card-header">
         <div className="">
           <h1>{material.title}</h1>
