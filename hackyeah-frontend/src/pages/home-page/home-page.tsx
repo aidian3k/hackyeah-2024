@@ -9,11 +9,47 @@ import { useToast } from '@/hooks/use-toast.ts';
 import TopBar from '@/features/top-bar/top-bar.tsx';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import Footer from '@/features/footer/footer.tsx';
+import MainPageFilters from './main-page-filters/main-page-filters.component';
+import AlternativeMaterialTile from '@/features/MaterialTile/alternative-material-tile.tsx';
 
 interface CarouselText {
   title: string;
   subtitle: string;
 }
+
+const alternativeMaterialMock = {
+  author: {
+    name: 'Cezary Skorupski',
+    avatarUrl:
+      'https://media.licdn.com/dms/image/v2/D4D03AQHRyjS_ulUnbQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1698778439429?e=1733356800&v=beta&t=jeyB5fH9ZQhxYSAkmoGVflCJ2wMzssESOQ4NutWha4E'
+  },
+  title: 'Uprawnienia w systemach operacyjnych',
+  lastUpdated: '03.2024',
+  rating: 3,
+  downloads: 3000,
+  description:
+    'Notatki z sieci komputerowych zawierające najważniejsze informacje z wykładów i ćwiczeń. Przygotowane przez studentów informatyki.',
+  fileComposition: {
+    video: 5,
+    image: 1,
+    text: 30
+  }
+};
+
+const universities = [
+  'Harvard University',
+  'Stanford University',
+  'Massachusetts Institute of Technology',
+  'University of Cambridge',
+  'University of Oxford',
+  'California Institute of Technology',
+  'ETH Zurich',
+  'University College London',
+  'Imperial College London',
+  'University of Chicago',
+  'National University of Singapore',
+  'Peking University'
+];
 import MainPageFilters from './main-page-filters/main-page-filters.component';
 import MaterialTile from '@/features/MaterialTile/MaterialTile.component';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -168,10 +204,16 @@ export default function HomePage() {
       </FormProvider>
           </div>
         </div>
-        <div className="flex justify-evenly basis-[350px] flex-wrap">
-          {isSuccess && learningResources.map(elem => (
-            <MaterialTile material={elem} />
-          ))}
+        <div className="container mx-auto pb-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-5">
+            {/*{materialMock.map(elem => (*/}
+            {/*  <MaterialTile material={elem} />*/}
+            {/*))}*/}
+            <AlternativeMaterialTile {...alternativeMaterialMock} />
+            <AlternativeMaterialTile {...alternativeMaterialMock} />
+            <AlternativeMaterialTile {...alternativeMaterialMock} />
+            <AlternativeMaterialTile {...alternativeMaterialMock} />
+          </div>
         </div>
       </main>
       <Footer />

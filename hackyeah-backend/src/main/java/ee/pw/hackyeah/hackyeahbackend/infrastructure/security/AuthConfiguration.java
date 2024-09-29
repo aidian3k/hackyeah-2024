@@ -1,13 +1,16 @@
 package ee.pw.hackyeah.hackyeahbackend.infrastructure.security;
 
 import ee.pw.hackyeah.hackyeahbackend.user.domain.UserRepository;
+import ee.pw.hackyeah.hackyeahbackend.user.domain.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,16 +31,11 @@ class AuthConfiguration {
     }
 
     @Bean
-    public AuthenticationManager configureAuthenticationManager() {
-        return new ProviderManager(configureDaoAuthenticationProvider());
-    }
-
-    @Bean
-    public DaoAuthenticationProvider configureDaoAuthenticationProvider() {
+    public AuthenticationProvider configureDaoAuthenticationProvider(UserDetailsService userDetailsService) {
         DaoAuthenticationProvider tokenAuthenticationProvider =
             new DaoAuthenticationProvider();
         tokenAuthenticationProvider.setUserDetailsService(
-            configureUserDetailsService()
+                userDetailsService
         );
         tokenAuthenticationProvider.setHideUserNotFoundExceptions(true);
         tokenAuthenticationProvider.setPasswordEncoder(
@@ -48,19 +46,19 @@ class AuthConfiguration {
     }
 
     @Bean
+    public AuthenticationManager configureAuthManager(
+            AuthenticationConfiguration authenticationConfiguration
+    ) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    @Bean
     public SessionRegistry configureSessionRegistry() {
         return new SessionRegistryImpl();
     }
 
     @Bean
-    public UserDetailsService configureUserDetailsService() {
-        return email ->
-            userRepository
-                .findByEmail(email)
-                .orElseThrow(() ->
-                    new BadCredentialsException(
-                        "User witch such email not found"
-                    )
-                );
+    public UserDetailsService configureUserDetailsService(UserService userService) {
+        return userService::getUserByEmail;
     }
 }

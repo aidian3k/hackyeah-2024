@@ -25,7 +25,7 @@ export default function LandingPage() {
                 <Button size="lg" onClick={() => navigate(RoutePaths.REGISTER)}>
                   Zacznij teraz
                 </Button>
-                <Button size="lg" variant="outline">
+                <Button size="lg" variant="outline" onClick={() => navigate(RoutePaths.CONTACT)}>
                   Dowiedz się więcej
                 </Button>
               </div>
