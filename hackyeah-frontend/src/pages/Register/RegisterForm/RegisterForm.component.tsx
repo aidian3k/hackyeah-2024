@@ -9,7 +9,11 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormInputs>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<RegisterFormInputs>();
   const { mutate: handleRegister, isSuccess, isError, error } = useRegisterUser();
   const navigate = useNavigate();
 
@@ -25,30 +29,29 @@ const RegisterForm = () => {
     }
   }, [isSuccess]);
 
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div>
         <Label htmlFor="email">Email:</Label>
-        <Input type="email" id="email" {...register('email', { required: "Email jest wymagany" })} />
+        <Input type="email" id="email" {...register('email', { required: 'Email jest wymagany' })} />
         {errors.email && <p className="text-red-500">{errors.email.message}</p>}
       </div>
 
       <div>
         <Label htmlFor="password">Hasło:</Label>
-        <Input type="password" id="password" {...register('password', { required: "Hasło jest wymagane" })} />
+        <Input type="password" id="password" {...register('password', { required: 'Hasło jest wymagane' })} />
         {errors.password && <p className="text-red-500">{errors.password.message}</p>}
       </div>
 
       <div>
         <Label htmlFor="password">Powtórz hasło:</Label>
-        <Input type="password" id="confirm-password" {...register('confirmPassword', { required: "Potwierdź wprowadzone hasło" })} />
+        <Input type="password" id="confirm-password" {...register('confirmPassword', { required: 'Potwierdź wprowadzone hasło' })} />
         {errors.password && <p className="text-red-500">{errors.password.message}</p>}
       </div>
 
       <div>
         <Label htmlFor="firstName">Imię:</Label>
-        <Input type="text" id="firstName" {...register('firstName', { required: "Imię jest wymagane" })} />
+        <Input type="text" id="firstName" {...register('firstName', { required: 'Imię jest wymagane' })} />
         {errors.firstName && <p className="text-red-500">{errors.firstName.message}</p>}
       </div>
 
@@ -59,25 +62,25 @@ const RegisterForm = () => {
 
       <div>
         <Label htmlFor="nickName">Nazwa użytkownika (nick):</Label>
-        <Input type="text" id="nickName" {...register('nickName', { required: "Nick jest wymagany" })} />
+        <Input type="text" id="nickName" {...register('nickName', { required: 'Nick jest wymagany' })} />
         {errors.nickName && <p className="text-red-500">{errors.nickName.message}</p>}
       </div>
 
       <div>
         <Label htmlFor="phoneNumber">Numer telefonu:</Label>
-        <Input type="tel" id="phoneNumber" {...register('phoneNumber', { required: "Numer telefonu jest wymagany" })} />
+        <Input type="tel" id="phoneNumber" {...register('phoneNumber', { required: 'Numer telefonu jest wymagany' })} />
         {errors.phoneNumber && <p className="text-red-500">{errors.phoneNumber.message}</p>}
       </div>
 
       <div>
         <Label htmlFor="birthDate">Data urodzenia:</Label>
-        <Input type="date" id="birthDate" {...register('birthDate', { required: "Data urodzenia jest wymagana" })} />
+        <Input type="date" id="birthDate" {...register('birthDate', { required: 'Data urodzenia jest wymagana' })} />
         {errors.birthDate && <p className="text-red-500">{errors.birthDate.message}</p>}
       </div>
 
       <div>
         <Label htmlFor="organization">Organizacja:</Label>
-        <Input type="text" id="organization" {...register('organization', { required: "Organizacja jest wymagana" })} />
+        <Input type="text" id="organization" {...register('organization', { required: 'Organizacja jest wymagana' })} />
         {errors.organization && <p className="text-red-500">{errors.organization.message}</p>}
       </div>
 

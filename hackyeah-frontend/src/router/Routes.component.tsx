@@ -18,7 +18,7 @@ const AppRoutes: FC = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to={RoutePaths.MAIN_PAGE} replace />} />
+        {/* <Route path="/" element={<Navigate to={RoutePaths.MAIN_PAGE} replace />} /> */}
         <Route path="/auth">
           <Route path={RoutePaths.LOGIN} element={<LoginPage />} />
           <Route path={RoutePaths.REGISTER} element={<RegisterPage />} />

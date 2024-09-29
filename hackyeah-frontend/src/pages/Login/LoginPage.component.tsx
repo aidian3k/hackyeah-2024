@@ -1,8 +1,5 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import LoginForm from './LoginForm/LoginForm.component';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Select } from '@/components/ui/select';
 import TopBar from '@/features/top-bar/top-bar.tsx';
 
 const LoginPage = () => {
@@ -15,7 +12,12 @@ const LoginPage = () => {
   return (
     <>
       <TopBar />
-      <div className="w-full h-full flex justify-center items-center mt-10">
+      <div
+        className="w-full h-screen flex justify-center items-center"
+        style={{
+          backgroundImage: `url(/images/home-page/note-1.jpg)`
+        }}
+      >
         <Card className="w-[500px]">
           <CardHeader>
             <CardTitle>Zaloguj się</CardTitle>

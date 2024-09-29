@@ -14,6 +14,8 @@ interface CarouselText {
     title: string;
     subtitle: string;
 }
+import UniversitiesAutocomplete from '@/features/common/UniversitiesAutocomplete/UniversitiesAutocomplete.component';
+import MainPageFilters from './main-page-filters/main-page-filters.component';
 
 const universities = [
     'Harvard University',
@@ -62,82 +64,69 @@ export default function HomePage() {
         }
     }, [isError]);
 
-    return (
-        <div className="min-h-screen bg-background">
-            <header
-                className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                <TopBar/>
-            </header>
-            <main className="w-full">
-                <div className="relative mb-8">
-                    <Carousel className="w-full h-full">
-                        <CarouselContent>
-                            {[1, 2, 3].map((_, index) => (
-                                <CarouselItem key={index}>
-                                    <div className="relative min-h-screen w-full overflow-hidden">
-                                        <div
-                                            className="absolute inset-0 bg-cover bg-center"
-                                            style={{
-                                                backgroundImage: `url(${bgImagesPrefix}-${index + 1}.jpg)`
-                                            }}
-                                        ></div>
-                                        <div className="absolute inset-0 bg-black/50"/>
-                                        <div
-                                            className="absolute inset-x-0 top-[20%] md:top-1/3 flex flex-col gap-3 items-center justify-center">
-                                            <h2 className="text-5xl font-bold text-white text-center">{carouselTexts[index].title}</h2>
-                                            <h2 className="text-xl text-white text-center">{carouselTexts[index].subtitle}</h2>
-                                        </div>
-                                    </div>
-                                </CarouselItem>
-                            ))}
-                        </CarouselContent>
-                        <CarouselPrevious className="left-4"/>
-                        <CarouselNext className="right-4"/>
-                    </Carousel>
-                    <div className="absolute inset-x-0 bottom-1/3 flex flex-col justify-center items-center">
-                        <div className="mx-auto min-w-[320px] px-5">
-                            <Tabs defaultValue="Studia" onValueChange={setActiveCategory}>
-                                <TabsList className="rounded-b-none h-fit">
-                                    <TabsTrigger className={'py-2 px-4'} value="Studia">
-                                        Studia
-                                    </TabsTrigger>
-                                    <TabsTrigger className={'py-2 px-4'} value="Szkoła średnia">
-                                        Szkoła średnia
-                                    </TabsTrigger>
-                                    <TabsTrigger className={'py-2 px-4'} value="Inne">
-                                        Inne
-                                    </TabsTrigger>
-                                </TabsList>
-                            </Tabs>
-                            <div className={'flex h-fit shadow-2xl shadow-black'}>
-                                <Input
-                                    size={300}
-                                    className="rounded-r-none w-full max-w-2xl bg-background backdrop-blur rounded-tl-none h-16"
-                                    placeholder="Wpisz wyszukiwaną frazę..."
-                                />
-                                <Button className={'rounded-l-none h-16 group'} size={'lg'}>
-                                    <MagnifyingGlassIcon
-                                        className="mr-2 size-4 group-hover:size-5 transition-all duration-200"/>
-                                    Szukaj
-                                </Button>
-                            </div>
-                        </div>
+  return (
+    <div className="min-h-screen bg-background">
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <TopBar />
+      </header>
+      <main className="w-full">
+        <div className="relative mb-8">
+          <Carousel className="w-full h-full">
+            <CarouselContent>
+              {[1, 2, 3].map((_, index) => (
+                <CarouselItem key={index}>
+                  <div className="relative min-h-screen w-full overflow-hidden">
+                    <div
+                      className="absolute inset-0 bg-cover bg-center"
+                      style={{
+                        backgroundImage: `url(${bgImagesPrefix}-${index + 1}.jpg)`
+                      }}
+                    ></div>
+                    <div className="absolute inset-0 bg-black/50" />
+                    <div className="absolute inset-x-0 top-[20%] md:top-1/3 flex flex-col gap-3 items-center justify-center">
+                      <h2 className="text-5xl font-bold text-white text-center">{carouselTexts[index].title}</h2>
+                      <h2 className="text-xl text-white text-center">{carouselTexts[index].subtitle}</h2>
                     </div>
-                </div>
-                <div className="container mx-auto px-4 py-8 relative -top-56">
-                    <Card className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 p-5">
-                        {universities.map((university, index) => (
-                            <Card key={index}>
-                                <CardContent className="flex items-center justify-between p-4">
-                                    <span className="text-lg font-medium">{university}</span>
-                                    <Button variant="outline">View</Button>
-                                </CardContent>
-                            </Card>
-                        ))}
-                    </Card>
-                </div>
-                <Footer/>
-            </main>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-4" />
+            <CarouselNext className="right-4" />
+          </Carousel>
+          <div className="absolute inset-x-0 bottom-[200px] flex flex-col gap-10 justify-center items-center">
+            <div className="mx-auto min-w-[320px] px-5">
+              <Tabs defaultValue="Studia" onValueChange={setActiveCategory}>
+                <TabsList className="rounded-b-none h-fit">
+                  <TabsTrigger className={'py-2 px-4'} value="Studia">
+                    Studia
+                  </TabsTrigger>
+                  <TabsTrigger className={'py-2 px-4'} value="Szkoła średnia">
+                    Szkoła średnia
+                  </TabsTrigger>
+                  <TabsTrigger className={'py-2 px-4'} value="Inne">
+                    Inne
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
+              <div className={'flex h-fit w-fit shadow-2xl shadow-black'}>
+                <Input
+                  size={300}
+                  className="rounded-r-none w-full max-w-2xl bg-background backdrop-blur rounded-tl-none h-16"
+                  placeholder="Wpisz wyszukiwaną frazę..."
+                />
+                <Button className={'rounded-l-none h-16 group'} size={'lg'}>
+                  <MagnifyingGlassIcon className="mr-2 size-4 group-hover:size-5 transition-all duration-200" />
+                  Szukaj
+                </Button>
+              </div>
+            </div>
+            <div className="mx-auto min-w-[320px] px-5">
+              <MainPageFilters />
+            </div>
+          </div>
         </div>
-    );
+      </main>
+    </div>
+  );
 }

@@ -12,7 +12,12 @@ const RegisterPage = () => {
   return (
     <>
       <TopBar />
-      <div className="w-full h-full flex justify-center items-center mt-10">
+      <div
+        className="w-full h-screen flex justify-center items-center"
+        style={{
+          backgroundImage: `url(/images/home-page/note-1.jpg)`
+        }}
+      >
         <Card className="w-[500px]">
           <CardHeader>
             <CardTitle>Zarejestruj się</CardTitle>

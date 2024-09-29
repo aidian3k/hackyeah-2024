@@ -38,6 +38,6 @@ const AddMaterial = () => {
       </Tabs>
     </div>
   );
-}
+};
 
 export default AddMaterial;

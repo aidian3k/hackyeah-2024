@@ -99,6 +99,10 @@ export default function LoggedUserSidebar({ username, tokenCount }: LoggedUserSi
           </NavItem>
         </div>
         <hr />
+        <div className={`flex items-center space-x-2 px-4 py-2 rounded-md bg-gray-200 ${isCollapsed ? 'justify-center' : ''}`}>
+          <Coins className="h-4 w-4" />
+          {!isCollapsed && <span>Tokeny: {tokenCount}</span>}
+        </div>
       </nav>
 
       <div className="p-4 border-t border-gray-200">
