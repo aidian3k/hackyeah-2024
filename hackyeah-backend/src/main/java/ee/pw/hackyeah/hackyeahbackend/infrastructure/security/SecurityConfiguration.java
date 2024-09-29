@@ -87,13 +87,16 @@ public class SecurityConfiguration {
                     .requestMatchers("/api/institution")
                     .permitAll();
             requestMatcherRegistry
-                    .requestMatchers("/api/faculty")
+                    .requestMatchers("/api/course/all")
                     .permitAll();
             requestMatcherRegistry
-                    .requestMatchers("/api/course")
+                    .requestMatchers("/api/unit/all")
                     .permitAll();
             requestMatcherRegistry
                     .requestMatchers("/api/learning-resources/free")
+                    .permitAll();
+            requestMatcherRegistry
+                    .requestMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/**", "/swagger-ui.html", "/webjars/**")
                     .permitAll();
         });
 
