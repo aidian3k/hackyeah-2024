@@ -44,13 +44,6 @@ const RegisterForm = () => {
             </div>
 
             <div>
-                <Label htmlFor="password">Powtórz hasło:</Label>
-                <Input type="password"
-                       id="confirm-password" {...register('confirmPassword', {required: 'Potwierdź wprowadzone hasło'})} />
-                {errors.password && <p className="text-red-500">{errors.password.message}</p>}
-            </div>
-
-            <div>
                 <Label htmlFor="firstName">Imię:</Label>
                 <Input type="text" id="firstName" {...register('firstName', {required: 'Imię jest wymagane'})} />
                 {errors.firstName && <p className="text-red-500">{errors.firstName.message}</p>}

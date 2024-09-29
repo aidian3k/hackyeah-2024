@@ -114,7 +114,7 @@ public class SecurityConfiguration {
 
         httpSecurity.sessionManagement(httpSecuritySessionManagementConfigurer ->
             httpSecuritySessionManagementConfigurer.sessionCreationPolicy(
-                SessionCreationPolicy.ALWAYS
+                SessionCreationPolicy.IF_REQUIRED
             )
         );
 
