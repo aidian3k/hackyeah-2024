@@ -25,7 +25,7 @@ const StudiesAutocomplete: React.FC<StudiesAutocompleteProps> = ({ studyFieldNam
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="outline" role="combobox" aria-expanded={open} className="w-full justify-between max-w-full md:max-w-64">
+        <Button variant="outline" role="combobox" aria-expanded={open} className="flex justify-between truncate max-w-full md:max-w-64">
           {currentStudy && isSuccess ? studies.courses.find(study => study.uid === currentStudy)?.name : 'Wybierz kierunek'}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>

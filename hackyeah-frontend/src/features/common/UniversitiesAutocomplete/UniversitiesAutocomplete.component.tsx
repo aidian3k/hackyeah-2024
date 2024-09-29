@@ -27,7 +27,6 @@ const UniversitiesAutocomplete: React.FC<UniversitiesAutocompleteProps> = ({ fie
   const { data: academicInstitutions, isLoading, isSuccess } = useGetAcademicInstitutions({ name: currentInstitution });
 
   return (
-    <div className="w-full">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button variant="outline" role="combobox" aria-expanded={open} className="flex justify-between truncate max-w-full md:max-w-64">
@@ -61,7 +60,6 @@ const UniversitiesAutocomplete: React.FC<UniversitiesAutocompleteProps> = ({ fie
           </Command>
         </PopoverContent>
       </Popover>
-    </div>
   );
 };
 
