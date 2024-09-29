@@ -54,10 +54,6 @@ public class User extends AppUserDetails {
     @NotNull @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "birth_date")
-    @NotNull @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDate birthDate;
-
     private String organization;
 
     @PositiveOrZero

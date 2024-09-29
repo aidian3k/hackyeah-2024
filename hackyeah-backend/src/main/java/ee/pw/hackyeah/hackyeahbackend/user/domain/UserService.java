@@ -34,7 +34,7 @@ public class UserService {
             .builder()
             .firstName(userRegistrationInput.firstName())
             .email(userRegistrationInput.email())
-            .birthDate(userRegistrationInput.birthDate())
+                .tokens(1L)
             .lastName(userRegistrationInput.lastName())
             .nickName(userRegistrationInput.nickName())
             .password(passwordEncoder.encode(userRegistrationInput.password()))
