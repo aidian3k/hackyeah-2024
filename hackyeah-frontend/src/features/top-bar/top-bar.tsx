@@ -29,7 +29,7 @@ export default function TopBar() {
 
         {/* Center - Navigation as (hidden on mobile) */}
         <nav className="hidden lg:flex space-x-12 justify-self-center">
-          <a href="/dodaj-notatke" className="text-foreground hover:text-primary duration-200 transition-colors">
+          <a href="/dashboard/materials/add" className="text-foreground hover:text-primary duration-200 transition-colors">
             Dodaj notatkę
           </a>
           <Link to={RoutePaths.ABOUT} className="text-foreground hover:text-primary duration-200 transition-colors">

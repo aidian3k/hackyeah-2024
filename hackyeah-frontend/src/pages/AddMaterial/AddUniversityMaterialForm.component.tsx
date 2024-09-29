@@ -48,7 +48,7 @@ const AddUniversityMaterialForm: React.FC<AddUniversityMaterialFormProps> = () =
   };
 
   return (
-    <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
+    <div className="max-w-lg mx-auto bg-background p-6 rounded-lg shadow-md">
       <h2 className="text-2xl font-semibold mb-6">Nowy materiał - Szkoła Wyższa</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>

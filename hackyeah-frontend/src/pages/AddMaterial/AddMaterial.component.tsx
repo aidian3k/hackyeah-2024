@@ -11,13 +11,13 @@ const AddMaterial = () => {
       <Tabs defaultValue="university" onValueChange={setActiveTrigger} className="pt-5 w-full">
         <div className="flex justify-center pb-5">
           <TabsList>
-            <TabsTrigger value="university" className={`data-[state=active]:bg-[#16a34a] data-[state=active]:text-white`}>
+            <TabsTrigger value="university" className={`data-[state=active]:bg-primary data-[state=active]:text-white`}>
               Szkoła Wyższa
             </TabsTrigger>
-            <TabsTrigger value="highSchool" className={`data-[state=active]:bg-[#16a34a] data-[state=active]:text-white`}>
+            <TabsTrigger value="highSchool" className={`data-[state=active]:bg-primary data-[state=active]:text-white`}>
               Szkoła Średnia
             </TabsTrigger>
-            <TabsTrigger value="others" className={`data-[state=active]:bg-[#16a34a] data-[state=active]:text-white`}>
+            <TabsTrigger value="others" className={`data-[state=active]:bg-primary data-[state=active]:text-white`}>
               Inne
             </TabsTrigger>
           </TabsList>
