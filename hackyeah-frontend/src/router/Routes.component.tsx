@@ -11,6 +11,7 @@ import Dashboard from '@/pages/Dashboard/Dashboard.component';
 import AddMaterial from '@/pages/AddMaterial/AddMaterial.component.tsx';
 import AboutUs from '@/pages/about-us/about-us.tsx';
 import FAQView from '@/pages/faq/faq.tsx';
+import TokenManagement from '@/pages/TokenManagement/TokenManagement.component';
 
 const AppRoutes: FC = () => {
   const { authenticated } = useSelector((state: RootState) => state.user);
@@ -28,6 +29,7 @@ const AppRoutes: FC = () => {
         <Route path={RoutePaths.FAQ} element={<FAQView />} />
         <Route path="/" element={<AuthorizedLayout />}>
           <Route path={RoutePaths.DASHBOARD} element={<Dashboard />} />
+          <Route path={RoutePaths.TOKEN_MANAGEMENT} element={<TokenManagement />} />
           <Route path={RoutePaths.ADD_MATERIAL} element={<AddMaterial />} />
         </Route>
       </Routes>
