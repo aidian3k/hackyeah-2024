@@ -36,7 +36,7 @@ export default function LoggedUserSidebar({ username, tokenCount }: LoggedUserSi
   const handleOptionClick = (option: string, path?: string) => {
     setSelectedOption(option);
     if (path) {
-      navigate(path); // Navigate to the provided path
+      navigate(path);
     }
   };
 
@@ -51,7 +51,7 @@ export default function LoggedUserSidebar({ username, tokenCount }: LoggedUserSi
         <TooltipTrigger asChild>
           <Button
             variant="ghost"
-            onClick={() => handleOptionClick(option, path)} // Pass the option and path to handle navigation
+            onClick={() => handleOptionClick(option, path)}
             className={`w-full justify-start ${isCollapsed ? "px-2" : ""} hover:bg-gray-200 transition-colors ${
               selectedOption === option ? "bg-blue-100" : ""
             }`}
