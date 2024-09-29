@@ -86,7 +86,6 @@ const carouselTexts: CarouselText[] = [
 ];
 
 export default function HomePage() {
-  const { data, isError, error } = useActuatorExampeQuery({});
   const [activeCategory, setActiveCategory] = useState('Studia');
   const { toast } = useToast();
   const formMethods = useForm<LearningResourcesFilterInputs>();
@@ -97,16 +96,6 @@ export default function HomePage() {
     studyId: formMethods.getValues('studyId'),
     subject: formMethods.getValues('subject')
   });
-
-  useEffect(() => {
-    if (isError) {
-      toast({
-        variant: 'destructive',
-        title: 'Niedostępność serwera',
-        description: error?.message
-      });
-    }
-  }, [isError]);
 
   const onSubmit = (data: LearningResourcesFilterInputs) => {
     console.log(data);
