@@ -42,13 +42,11 @@ class AmazonConfiguration {
     @Bean
     @Profile({ "local" })
     public AmazonS3 amazonS3LocalService() {
-        checkForAmazonMockRunning();
 
-        if (checkForAmazonMockRunning()) {
             log.debug("Running amazonS3 mock from docker-image");
 
             return AmazonS3ClientBuilder
-                .standard()
+                    .standard()
                 .withCredentials(
                     new AWSCredentialsProvider() {
                         @Override
@@ -68,31 +66,7 @@ class AmazonConfiguration {
                         Regions.EU_CENTRAL_1.getName()
                     )
                 )
+                    .withPathStyleAccessEnabled(true)
                 .build();
-        } else {
-            return AmazonS3ClientBuilder
-                .standard()
-                .withCredentials(
-                    new AWSStaticCredentialsProvider(
-                        new BasicAWSCredentials(
-                            amazonConfigurationProperties.getAccessKey(),
-                            amazonConfigurationProperties.getSecretKey()
-                        )
-                    )
-                )
-                .withRegion(Regions.EU_CENTRAL_1)
-                .build();
-        }
-    }
-
-    private boolean checkForAmazonMockRunning() {
-        int awsMockPort = 9090;
-        String host = "localhost";
-
-        try (var socket = new Socket(host, awsMockPort)) {
-            return true;
-        } catch (Exception exception) {
-            return false;
-        }
     }
 }

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -47,16 +50,39 @@ public class LearningResourceController {
         return ResponseEntity.ok(learningResourceFreeDTO);
     }
 
-    @PostMapping("/learning-resource/create")
+    @PostMapping( path = "/learning-resource/create", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<LearningResourceBoughtDTO> handleLearningResourceCreation(
-        @ModelAttribute(
-            "learningResourceCreationDTO"
-        ) LearningResourceCreationDTO learningResourceCreationDTO,
-        @ModelAttribute("filesList") List<MultipartFile> filesList
+        @RequestParam(
+            "subjectName"
+        ) String subjectName,
+        @RequestParam(
+            "courseId"
+        ) String courseId,
+        @RequestParam(
+            "institutionId"
+        ) String institutionId,
+        @RequestParam(
+            "unitId"
+        ) String unitId,
+        @RequestParam(
+            "description"
+        ) String description,
+        @RequestParam(
+            "title"
+        ) String title,
+        @RequestParam("filesList") List<MultipartFile> filesList
     ) {
         final LearningResourceBoughtDTO learningResourceBoughtDTO =
             learningResourceService.handleUserLearningResourceCreation(
-                learningResourceCreationDTO,
+                LearningResourceCreationDTO.
+                    builder()
+                        .unitId(unitId)
+                        .institutionId(institutionId)
+                        .courseId(courseId)
+                        .subjectName(subjectName)
+                        .title(title)
+                        .description(description)
+                        .build(),
                 filesList
             );
 
