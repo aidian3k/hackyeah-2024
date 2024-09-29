@@ -1,4 +1,13 @@
 import { Link } from 'react-router-dom';
+import delfinLogo from '@/assets/delfin.svg';
+import React from 'react';
+
+const Logo = () => (
+  <div className="flex items-center justify-center h-16 w-16">
+    {' '}
+    <img src={delfinLogo} alt="Delfin logo" className="h-full w-full" />
+  </div>
+);
 
 export default function Footer() {
   return (
@@ -7,10 +16,10 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="space-y-4">
             <Link to="/" className="flex items-center">
-              <img src="/placeholder.svg" alt="Logo firmy" width={40} height={40} className="mr-2" />
-              <span className="text-xl font-bold">NoteShare</span>
+              <Logo />
+              {<span className="font-bold text-lg">Dolphinder</span>}
             </Link>
-            <p className="text-sm">Krótki opis firmy lub slogan może być tutaj umieszczony.</p>
+            <p className="font-bold text-sm">Znajdź materiały dla siebie i zostań ekspertem.</p>
           </div>
 
           <div>
@@ -78,7 +87,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 pt-8 border-t border-gray-200 text-center text-sm">
-          © {new Date().getFullYear()} Nazwa Firmy. Wszelkie prawa zastrzeżone.
+          © {new Date().getFullYear()} Dolphinder. Wszelkie prawa zastrzeżone.
         </div>
       </div>
     </footer>

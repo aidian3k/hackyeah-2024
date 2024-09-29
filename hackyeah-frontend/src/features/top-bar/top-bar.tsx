@@ -48,7 +48,7 @@ export default function TopBar() {
           <Link to={RoutePaths.ABOUT} className="text-foreground hover:text-primary duration-200 transition-colors">
             O nas
           </Link>
-          <a href="/kontakt" className="text-foreground hover:text-primary duration-200 transition-colors">
+          <a href="/contact" className="text-foreground hover:text-primary duration-200 transition-colors">
             Kontakt
           </a>
           <a href="/faq" className="text-foreground hover:text-primary duration-200 transition-colors">

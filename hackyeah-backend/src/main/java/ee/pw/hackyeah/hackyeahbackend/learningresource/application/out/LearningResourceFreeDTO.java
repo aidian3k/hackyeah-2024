@@ -10,5 +10,9 @@ public record LearningResourceFreeDTO(
     String title,
     String description,
     LocalDateTime createdAt,
-    ReviewDTO reviewDTO
+    ReviewDTO reviewDTO,
+    int numberOfPhotos,
+    int numberOfVideos,
+    int numberOfPdfs,
+    int otherMaterials
 ) {}

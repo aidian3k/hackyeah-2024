@@ -4,6 +4,7 @@ import { BookOpen, Share2, Users } from 'lucide-react';
 import TopBar from '@/features/top-bar/top-bar.tsx';
 import { useNavigate } from 'react-router-dom';
 import { RoutePaths } from '@/router/Routes.types.ts';
+import Footer from '@/features/footer/footer.tsx';
 
 export default function LandingPage() {
   const navigate = useNavigate();
@@ -86,11 +87,7 @@ export default function LandingPage() {
         </section>
       </main>
 
-      <footer className="bg-background py-6">
-        <div className="container mx-auto px-4 text-center text-muted-foreground">
-          <p>&copy; 2024 Aplikacja do dzielenia się notatkami. Wszelkie prawa zastrzeżone.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

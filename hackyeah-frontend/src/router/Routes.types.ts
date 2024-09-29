@@ -6,5 +6,6 @@ export enum RoutePaths {
   ADD_MATERIAL = '/dashboard/materials/add',
   ABOUT = '/about-us',
   FAQ = '/faq',
+  CONTACT = '/contact',
   TOKEN_MANAGEMENT = '/tokens'
 }
