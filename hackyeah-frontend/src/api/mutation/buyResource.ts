@@ -11,7 +11,8 @@ type BuyType = {
 export const useBuyResource = () => {
   return useMutation<any, AxiosError, BuyType>({
     mutationFn: async (data: BuyType) => {
-      const response = await axiosInstance.post(RoutePaths.BUY_RESOURCE.replace(':id', data.learningResourceId.toString()));
+      console.log(data);
+      const response = await axiosInstance.post(RoutePaths.BUY_RESOURCE.replace(':id', data.learningResourceId.toString()), data);
       return response;
     }
   });

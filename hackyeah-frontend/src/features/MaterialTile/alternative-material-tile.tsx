@@ -49,7 +49,7 @@ export default function AlternativeMaterialTile({
 
   useEffect(() => {
     if (isSuccess) {
-      navigate(RoutePaths.MY_MATERIALS);
+      navigate('/test');
     }
   }, [isSuccess])
 
