@@ -119,7 +119,7 @@ public class SecurityConfiguration {
         );
 
         httpSecurity.authorizeHttpRequests(requestMatcherRegistry ->
-            requestMatcherRegistry.anyRequest().authenticated()
+            requestMatcherRegistry.anyRequest().permitAll()
         );
 
         return httpSecurity.build();
