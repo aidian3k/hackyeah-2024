@@ -4,12 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 
-interface AddMaterialFormProps {}
+interface AddHighSchoolMaterialFormProps {}
 
-const AddMaterialForm: React.FC<AddMaterialFormProps> = () => {
+const AddHighSchoolMaterialForm: React.FC<AddHighSchoolMaterialFormProps> = () => {
   const [title, setTitle] = useState("");
-  const [universityId, setUniversityId] = useState("");
-  const [facultyId, setFacultyId] = useState("");
+  const [highSchoolId, setHighSchoolId] = useState("");
   const [courseId, setCourseId] = useState("");
   const [subjectName, setSubjectName] = useState("");
   const [description, setDescription] = useState("");
@@ -26,8 +25,7 @@ const AddMaterialForm: React.FC<AddMaterialFormProps> = () => {
 
     const formData = new FormData();
     formData.append("title", title);
-    formData.append("universityId", universityId);
-    formData.append("facultyId", facultyId);
+    formData.append("highSchoolId", highSchoolId);
     formData.append("courseId", courseId);
     formData.append("subjectName", subjectName);
     formData.append("description", description);
@@ -48,8 +46,8 @@ const AddMaterialForm: React.FC<AddMaterialFormProps> = () => {
   };
 
   return (
-    <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-semibold mb-6">Dodaj nowy materiał</h2>
+    <div className="max-w-lg mx-auto bg-background p-6 rounded-lg shadow-md">
+      <h2 className="text-2xl font-semibold mb-6">Nowy materiał - Szkoła Średnia</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <Label htmlFor="title">Tytuł materiału</Label>
@@ -64,25 +62,13 @@ const AddMaterialForm: React.FC<AddMaterialFormProps> = () => {
         </div>
 
         <div>
-          <Label htmlFor="universityId">Szkoła Wyższa</Label>
+          <Label htmlFor="highSchoolId">Szkoła Średnia</Label>
           <Input
-            id="universityId"
+            id="highSchoolId"
             type="text"
-            value={universityId}
-            onChange={(e) => setUniversityId(e.target.value)}
-            placeholder="Wprowadź szkołę wyższą"
-            required
-          />
-        </div>
-
-        <div>
-          <Label htmlFor="facultyId">Wydział</Label>
-          <Input
-            id="facultyId"
-            type="text"
-            value={facultyId}
-            onChange={(e) => setFacultyId(e.target.value)}
-            placeholder="Wprowadź wydział"
+            value={highSchoolId}
+            onChange={(e) => setHighSchoolId(e.target.value)}
+            placeholder="Wprowadź szkołę średnią"
             required
           />
         </div>
@@ -143,4 +129,4 @@ const AddMaterialForm: React.FC<AddMaterialFormProps> = () => {
   );
 };
 
-export default AddMaterialForm;
+export default AddHighSchoolMaterialForm;
