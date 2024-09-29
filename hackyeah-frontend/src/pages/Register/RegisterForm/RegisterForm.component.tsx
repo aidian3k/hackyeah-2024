@@ -4,7 +4,7 @@ import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
 import {RoutePaths} from '@/router/Routes.types';
 import {RegisterFormInputs} from '@/ts/interface/Register.types';
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {SubmitHandler, useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
 
@@ -14,7 +14,7 @@ const RegisterForm = () => {
         handleSubmit,
         formState: {errors}
     } = useForm<RegisterFormInputs>();
-    const {mutate: handleRegister, isSuccess, isError, error} = useRegisterUser();
+    const {mutate: handleRegister, isSuccess} = useRegisterUser();
     const navigate = useNavigate();
 
     const onSubmit: SubmitHandler<RegisterFormInputs> = data => {

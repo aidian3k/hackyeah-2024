@@ -1,6 +1,5 @@
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import delfinLogo from '@/assets/delfin.svg';
-import React from 'react';
 
 const Logo = () => (
   <div className="flex items-center justify-center h-16 w-16">

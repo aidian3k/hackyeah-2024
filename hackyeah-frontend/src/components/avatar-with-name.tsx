@@ -1,5 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import * as React from 'react';
+import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,7 +21,6 @@ export function DropdownForAvatar({
   email: string | undefined;
   pictureUrl: string | undefined;
 }) {
-  const [isOpen, setIsOpen] = React.useState(false);
   const dispatch = useDispatch();
 
   return (
@@ -42,7 +40,7 @@ export function DropdownForAvatar({
             <DropdownMenuItem>Ustawienia</DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => {dispatch(logout());setIsOpen(true);}}>Wyloguj się</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => {dispatch(logout());}}>Wyloguj się</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </>

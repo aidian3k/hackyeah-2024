@@ -1,9 +1,8 @@
-import React from 'react';
-import { Clapperboard, FileText, PencilLine, Phone } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import {Clapperboard, FileText, PencilLine, Phone} from 'lucide-react';
+import {Button} from '@/components/ui/button';
+import {Card, CardContent, CardFooter, CardHeader} from '@/components/ui/card';
 
-const MaterialTile = material => {
+const MaterialTile = (material: any) => {
   material = material.material;
 
   return (

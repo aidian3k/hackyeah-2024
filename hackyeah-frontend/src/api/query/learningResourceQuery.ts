@@ -1,9 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
-import { Endpoints } from '../Endpoints.types';
-import { axiosInstance } from '../QueryClient';
-import { StudiesApiResponse } from '@/ts/interface/Studies';
-import { LearningResourceFilterDTO, LearningResourcesFilterInputs, Resource } from '@/ts/interface/LearningResource';
+import {useQuery} from '@tanstack/react-query';
+import {AxiosError} from 'axios';
+import {Endpoints} from '../Endpoints.types';
+import {axiosInstance} from '../QueryClient';
+import {LearningResourceFilterDTO, LearningResourcesFilterInputs, Resource} from '@/ts/interface/LearningResource';
 
 export const useGetLearningMaterials = (params: LearningResourcesFilterInputs) => {
   return useQuery<Resource[], AxiosError>({

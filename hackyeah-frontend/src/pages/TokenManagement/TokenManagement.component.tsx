@@ -1,24 +1,23 @@
-import { useState } from 'react';
+import {useState} from 'react';
 
 import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger
 } from '@/components/ui/drawer';
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import {ToggleGroup, ToggleGroupItem} from '@/components/ui/toggle-group';
+import {ChevronLeft, ChevronRight} from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
+import {Button} from '@/components/ui/button';
 
 import mastercard from '@/assets/Mastercard.png';
 import visa from '@/assets/Visa_Brandmark_Blue_RGB.png';
 import blik from '@/assets/BLIK-LOGO-RGB.png';
-import { Input } from '@/components/ui/input';
+import {Input} from '@/components/ui/input';
 
 const TokenManagement = () => {
   const [amount, setAmount] = useState(5);

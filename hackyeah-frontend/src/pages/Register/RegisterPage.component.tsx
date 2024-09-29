@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
 import RegisterForm from './RegisterForm/RegisterForm.component';
 import TopBar from '@/features/top-bar/top-bar.tsx';
 

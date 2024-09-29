@@ -56,14 +56,13 @@ export default function LoggedUserSidebar({username, tokenCount}: LoggedUserSide
               children,
               option,
               path,
-              onClick
           }) => (
         <TooltipProvider>
             <Tooltip>
                 <TooltipTrigger asChild>
                     <Button
                         variant="ghost"
-                        onClick={() => {onClick(); handleOptionClick(option, path);}}
+                        onClick={() => {handleOptionClick(option, path);}}
                         className={`w-full justify-start ${isCollapsed ? 'px-2' : ''} hover:bg-primary transition-colors ${
                             selectedOption === option ? 'bg-primary-foreground' : ''
                         }`}

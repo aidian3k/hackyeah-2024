@@ -1,9 +1,7 @@
-import React, { FC } from 'react';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { RoutePaths } from './Routes.types';
+import {FC} from 'react';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {RoutePaths} from './Routes.types';
 import LoginPage from '@/pages/Login/LoginPage.component';
-import { RootState } from '@/store/store';
-import { useSelector } from 'react-redux';
 import RegisterPage from '@/pages/Register/RegisterPage.component';
 import AuthorizedLayout from '@/features/AuthorizedLayout.component.tsx';
 import HomePage from '@/pages/home-page/home-page.tsx';
@@ -16,7 +14,6 @@ import Contact from '@/pages/contact/contact.tsx';
 import DetailedNoteView from '@/pages/detailed-note-view/detailed-note-view.tsx';
 
 const AppRoutes: FC = () => {
-  const { authenticated } = useSelector((state: RootState) => state.user);
 
   return (
     <BrowserRouter>

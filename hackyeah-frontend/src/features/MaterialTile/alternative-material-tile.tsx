@@ -1,10 +1,9 @@
-import { useState } from 'react';
-import { Star, Video, Image, FileText, Calendar, ShoppingCart, Users } from 'lucide-react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {FileText, Image, ShoppingCart, Star, Users, Video} from 'lucide-react';
+import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from '@/components/ui/card';
+import {Badge} from '@/components/ui/badge';
+import {Button} from '@/components/ui/button';
+import {Progress} from '@/components/ui/progress';
+import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
 
 interface PackageProps {
   author: {
@@ -32,18 +31,11 @@ export default function AlternativeMaterialTile({
   downloads,
   description,
   fileComposition,
-  meetingScheduled
 }: PackageProps) {
-  const [isMeetingScheduled, setIsMeetingScheduled] = useState(!!meetingScheduled);
 
   const handleBuy = () => {
     // Implement buy functionality here
     console.log('Package purchased!');
-  };
-
-  const handleScheduleMeeting = () => {
-    // Implement meeting scheduling functionality here
-    setIsMeetingScheduled(true);
   };
 
   return (

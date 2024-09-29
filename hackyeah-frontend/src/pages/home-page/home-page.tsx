@@ -3,7 +3,6 @@ import {Input} from '@/components/ui/input';
 import {Button} from '@/components/ui/button';
 import {Tabs, TabsList, TabsTrigger} from '@/components/ui/tabs';
 import {Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious} from '@/components/ui/carousel';
-import {useToast} from '@/hooks/use-toast.ts';
 import TopBar from '@/features/top-bar/top-bar.tsx';
 import {MagnifyingGlassIcon} from '@radix-ui/react-icons';
 import Footer from '@/features/footer/footer.tsx';
@@ -55,11 +54,10 @@ const carouselTexts: CarouselText[] = [
 ];
 
 export default function HomePage() {
-    const [activeCategory, setActiveCategory] = useState('Studia');
-    const {toast} = useToast();
+    const [_activeCategory, setActiveCategory] = useState('Studia');
     const formMethods = useForm<LearningResourcesFilterInputs>();
 
-    const {data: learningResources, isLoading, isSuccess} = useGetLearningMaterials({
+    const {data: learningResources} = useGetLearningMaterials({
         institutionId: formMethods.getValues('institutionId'),
         unitId: formMethods.getValues('unitId'),
         studyId: formMethods.getValues('studyId'),
