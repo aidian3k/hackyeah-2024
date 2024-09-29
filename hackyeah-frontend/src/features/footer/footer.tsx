@@ -7,8 +7,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="space-y-4">
             <Link to="/" className="flex items-center">
-              <img src="/placeholder.svg" alt="Logo firmy" width={40} height={40} className="mr-2" />
-              <span className="text-xl font-bold">NoteShare</span>
+              <img src="/src/assets/delfin.svg" alt="Logo firmy" width={40} height={40} className="mr-2" />
+              <span className="text-xl font-bold">Dolphinder</span>
             </Link>
             <p className="text-sm">Krótki opis firmy lub slogan może być tutaj umieszczony.</p>
           </div>
