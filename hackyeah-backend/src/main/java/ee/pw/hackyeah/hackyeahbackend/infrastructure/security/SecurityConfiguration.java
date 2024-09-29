@@ -104,7 +104,7 @@ public class SecurityConfiguration {
         );
 
         httpSecurity.authorizeHttpRequests(requestMatcherRegistry ->
-            requestMatcherRegistry.anyRequest().permitAll()
+            requestMatcherRegistry.anyRequest().authenticated()
         );
 
         return httpSecurity.build();
