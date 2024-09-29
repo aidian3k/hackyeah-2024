@@ -53,13 +53,14 @@ const universities = [
 
 const materialMock = [
   {
-    title: 'siema',
-    subject: 'siema',
-    author: 'siema siema',
+    title: 'Algorytmy kompresji',
+    subject: 'Języki i metody programowania',
+    author: 'Basia Gąsiewska',
     date: '03.2024',
     grade: 3.5,
     used: 1762,
-    descr: 'bla bla bla',
+    descr:
+      'Aby zrobić te materiały chodziłam na wszystkie wykłady. Zawiera wszystkie informacje, które były warte zapamiętania według jstara.',
     dataTypes: {
       video: 2,
       pdf: 3,
