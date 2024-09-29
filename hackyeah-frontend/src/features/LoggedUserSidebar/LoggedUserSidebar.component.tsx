@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { User, PlusCircle, Coins, Settings, LogOut, GraduationCap, School, Briefcase, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Briefcase, ChevronLeft, ChevronRight, Coins, GraduationCap, LogOut, PlusCircle, School, Settings, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { useNavigate } from 'react-router-dom';
 import { RoutePaths } from '@/router/Routes.types.ts';
 
 import delfinLogo from '@/assets/delfin.svg';
+import { logout } from '@/store/user/user.slice.ts';
+import { useDispatch } from 'react-redux';
 
 interface LoggedUserSidebarProps {
   username: string;
@@ -23,6 +25,7 @@ export default function LoggedUserSidebar({ username, tokenCount }: LoggedUserSi
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleOptionClick = (option: string, path?: string) => {
     setSelectedOption(option);
@@ -31,18 +34,22 @@ export default function LoggedUserSidebar({ username, tokenCount }: LoggedUserSi
     }
   };
 
-  const NavItem: React.FC<{ icon: React.ReactNode; children: React.ReactNode; option: string; path?: string }> = ({
-    icon,
-    children,
-    option,
-    path
-  }) => (
+  const NavItem: React.FC<{
+    icon: React.ReactNode;
+    children: React.ReactNode;
+    option: string;
+    path?: string;
+    onClick?: () => void;
+  }> = ({ icon, children, option, path, onClick }) => (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
           <Button
             variant="ghost"
-            onClick={() => handleOptionClick(option, path)}
+            onClick={() => {
+              onClick();
+              handleOptionClick(option, path);
+            }}
             className={`w-full justify-start ${isCollapsed ? 'px-2' : ''} hover:bg-primary transition-colors ${
               selectedOption === option ? 'bg-primary-foreground' : ''
             }`}
@@ -102,14 +109,10 @@ export default function LoggedUserSidebar({ username, tokenCount }: LoggedUserSi
           </NavItem>
         </div>
         <hr />
-        <div className={`flex items-center space-x-2 px-4 py-2 rounded-md bg-gray-200 ${isCollapsed ? 'justify-center' : ''}`}>
-          <Coins className="h-4 w-4" />
-          {!isCollapsed && <span>Tokeny: {tokenCount}</span>}
-        </div>
       </nav>
 
       <div className="p-4 border-t border-gray-200">
-        <NavItem icon={<Coins className="h-4 w-4" />} option="tokens">
+        <NavItem icon={<Coins className="h-4 w-4" />} option="tokens" path={RoutePaths.TOKEN_MANAGEMENT}>
           <span>Tokeny: {tokenCount}</span>
         </NavItem>
       </div>
@@ -120,7 +123,14 @@ export default function LoggedUserSidebar({ username, tokenCount }: LoggedUserSi
         <NavItem icon={<Settings className="h-4 w-4" />} option="settings">
           Ustawienia
         </NavItem>
-        <NavItem icon={<LogOut className="h-4 w-4" />} option="logout" path={RoutePaths.LOGIN}>
+        <NavItem
+          onClick={() => {
+            dispatch(logout());
+          }}
+          icon={<LogOut className="h-4 w-4" />}
+          option="logout"
+          path={RoutePaths.LOGIN}
+        >
           Wyloguj
         </NavItem>
       </div>

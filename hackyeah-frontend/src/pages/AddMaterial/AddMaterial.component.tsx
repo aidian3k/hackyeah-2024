@@ -32,7 +32,7 @@ const AddMaterial = () => {
           <AddHighSchoolMaterialForm />
         </TabsContent>
 
-        <TabsContent value="others">I na chuj tak testujesz</TabsContent>
+        <TabsContent value="others">TODO</TabsContent>
       </Tabs>
     </div>
   );
