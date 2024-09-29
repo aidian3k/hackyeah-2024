@@ -8,12 +8,11 @@ import ee.pw.hackyeah.hackyeahbackend.review.domain.repository.ReviewRepository;
 import ee.pw.hackyeah.hackyeahbackend.user.domain.User;
 import ee.pw.hackyeah.hackyeahbackend.user.domain.UserService;
 import jakarta.persistence.EntityManager;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -59,15 +58,16 @@ public class ReviewService {
         return reviewRepository
             .findAllByLearningResourceId(learningResourceId)
             .stream()
-            .map(review -> ReviewDTO
-                .builder()
-                .createdAt(review.getCreatedAt())
-                .authorName(review.getAuthor().getFirstName())
-                .rating(review.getRating())
-                .learningResourceId(review.getLearningResource().getId())
-                .reviewId(review.getId())
-                .comment(review.getComment())
-                .build()
+            .map(review ->
+                ReviewDTO
+                    .builder()
+                    .createdAt(review.getCreatedAt())
+                    .authorName(review.getAuthor().getFirstName())
+                    .rating(review.getRating())
+                    .learningResourceId(review.getLearningResource().getId())
+                    .reviewId(review.getId())
+                    .comment(review.getComment())
+                    .build()
             )
             .toList();
     }

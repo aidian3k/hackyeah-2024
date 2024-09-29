@@ -4,11 +4,10 @@ import ee.pw.hackyeah.hackyeahbackend.institution.application.in.faculty.PolonIn
 import ee.pw.hackyeah.hackyeahbackend.institution.application.out.FacultyOutDTO;
 import ee.pw.hackyeah.hackyeahbackend.institution.domain.Faculty;
 import ee.pw.hackyeah.hackyeahbackend.institution.domain.repository.FacultyRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -21,31 +20,43 @@ public class FacultyService {
 
     public FacultyOutDTO handleInstitutionUnitsSearch(String institutionId) {
         List<FacultyOutDTO.SingleUnit> singleUnits = facultyClient
-                .handleGetInstitutionFacultiesRequest(institutionId).getUnits().stream()
-                .map(this::mapToSingleUnits)
-                .toList();
+            .handleGetInstitutionFacultiesRequest(institutionId)
+            .getUnits()
+            .stream()
+            .map(this::mapToSingleUnits)
+            .toList();
 
-        singleUnits.forEach(unit -> saveIfUnitNotPersisted(unit, institutionId));
+        singleUnits.forEach(unit -> saveIfUnitNotPersisted(unit, institutionId)
+        );
 
         return new FacultyOutDTO(singleUnits);
     }
 
-    private FacultyOutDTO.SingleUnit mapToSingleUnits(PolonInstitutionFacultyDTO.UnitInfo singleUnit) {
-        return new FacultyOutDTO.SingleUnit(singleUnit.getUid(),
-                singleUnit.getName(),
-                singleUnit.getStatus());
+    private FacultyOutDTO.SingleUnit mapToSingleUnits(
+        PolonInstitutionFacultyDTO.UnitInfo singleUnit
+    ) {
+        return new FacultyOutDTO.SingleUnit(
+            singleUnit.getUid(),
+            singleUnit.getName(),
+            singleUnit.getStatus()
+        );
     }
 
-    private void saveIfUnitNotPersisted(FacultyOutDTO.SingleUnit singleUnit, String institutionId) {
+    private void saveIfUnitNotPersisted(
+        FacultyOutDTO.SingleUnit singleUnit,
+        String institutionId
+    ) {
         if (!facultyRepository.existsById(singleUnit.uuid())) {
             facultyRepository.save(
-                    Faculty
-                            .builder()
-                            .id(singleUnit.uuid())
-                            .name(singleUnit.name())
-                            .status(singleUnit.status())
-                            .institution(institutionService.getInstitutionByUid(institutionId))
-                            .build()
+                Faculty
+                    .builder()
+                    .id(singleUnit.uuid())
+                    .name(singleUnit.name())
+                    .status(singleUnit.status())
+                    .institution(
+                        institutionService.getInstitutionByUid(institutionId)
+                    )
+                    .build()
             );
         }
     }
