@@ -4,5 +4,6 @@ import axios from 'axios';
 export const queryClient = new QueryClient();
 
 export const axiosInstance = axios.create({
-  baseURL: 'http://localhost:8080/api'
+  baseURL: 'http://localhost:8080/api',
+  withCredentials: true,
 });
