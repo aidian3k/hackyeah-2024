@@ -93,7 +93,17 @@ public class MediaService {
         );
     }
 
-    public Set<URL> getDownloadMediaU(Collection<Media> media) {
+    public String getDownloadMediaUrl(Media media) {
+        return
+            amazonS3.generatePresignedUrl(
+                new GeneratePresignedUrlRequest(
+                    uploadBucketName,
+                    media.getObjectKey()
+                )
+            ).toString();
+    }
+
+    public Set<URL> getDownloadMediaUrl(Collection<Media> media) {
         return media
             .stream()
             .map(medium ->

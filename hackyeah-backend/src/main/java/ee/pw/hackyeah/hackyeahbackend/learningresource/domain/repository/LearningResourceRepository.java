@@ -21,4 +21,8 @@ public interface LearningResourceRepository
         String institutionId,
         String unitId
     );
+
+    @Query("select lr from LearningResource lr" +
+            " where lr.subject.id = :subjectId")
+    Set<LearningResource> findLearningResourcesBySubjectId(Long subjectId);
 }

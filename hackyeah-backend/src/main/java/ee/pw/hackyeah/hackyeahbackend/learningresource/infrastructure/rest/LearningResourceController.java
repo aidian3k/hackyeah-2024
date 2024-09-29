@@ -11,6 +11,7 @@ import java.util.Set;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,6 +25,26 @@ import org.springframework.web.multipart.MultipartFile;
 public class LearningResourceController {
 
     private final LearningResourceService learningResourceService;
+
+    @GetMapping("/learning-resource/{subjectId}")
+    public ResponseEntity<Set<LearningResourceBoughtDTO>> handleLearningResourcesBought(
+        @RequestBody Long subjectId
+    ) {
+        final Set<LearningResourceBoughtDTO> learningResourceFreeDTO =
+            learningResourceService.getLearningResourceBoughtForSubjectId(
+                subjectId
+            );
+
+        return ResponseEntity.ok(learningResourceFreeDTO);
+    }
+
+    @GetMapping("/learning-resource/bought")
+    public ResponseEntity<Set<LearningResourceBoughtDTO>> handleLearningResourcesBought() {
+        final Set<LearningResourceBoughtDTO> learningResourceFreeDTO =
+            learningResourceService.getLearningResourceBought();
+
+        return ResponseEntity.ok(learningResourceFreeDTO);
+    }
 
     @PostMapping("/learning-resource/create")
     public ResponseEntity<LearningResourceBoughtDTO> handleLearningResourceCreation(
