@@ -32,3 +32,15 @@ export type Resource = {
   numberOfPdfs: number;
   otherMaterials: number;
 }
+
+export type PostLearningResourceDTO = {
+  learningResourceCreationDTO: {
+    "title": string,
+    "institutionId": string,
+    "unitId": string,
+    "courseId": string,
+    "subjectName": string,
+    "description": string
+  },
+  filesList: any[];
+}
