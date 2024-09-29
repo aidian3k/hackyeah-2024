@@ -12,9 +12,9 @@ public interface LearningResourceRepository
 
     @Query("select lr from LearningResource lr" +
             " where lr.subject.name like %:subjectName%" +
-            " and lr.subject.course.id = :courseId " +
-            "and lr.subject.course.faculty.id = :unitId " +
-            "and lr.subject.course.faculty.institution.id = :institutionId")
+            " or lr.subject.course.id = :courseId " +
+            "or lr.subject.course.faculty.id = :unitId " +
+            "or lr.subject.course.faculty.institution.id = :institutionId")
     Set<LearningResource> findLearningResourcesBySubjectNameAndCourseIdAndInstitutionIdAndUnitId(
         String subjectName,
         String courseId,
