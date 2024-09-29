@@ -23,6 +23,7 @@ const AddUniversityMaterialForm: React.FC<AddUniversityMaterialFormProps> = () =
   useEffect(() => {
     if (isSuccess) {
       alert("Materiał został dodany");
+      formMethods.reset();
     }
   }, [isError, isSuccess]);
 
