@@ -32,7 +32,7 @@ export type Resource = {
   numberOfPhotos: number;
   numberOfVideos: number;
   numberOfPdfs: number;
-  author: UserInfo;
+  author?: UserInfo;
   otherMaterials: number;
 }
 

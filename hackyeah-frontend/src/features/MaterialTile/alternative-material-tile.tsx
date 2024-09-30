@@ -1,18 +1,23 @@
-import {FileText, Image, ShoppingCart, Star, Users, Video} from 'lucide-react';
-import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from '@/components/ui/card';
-import {Badge} from '@/components/ui/badge';
-import {Button} from '@/components/ui/button';
-import {Progress} from '@/components/ui/progress';
-import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
+import { useEffect, useState } from 'react';
+import { Star, Video, Image, FileText, Calendar, ShoppingCart, Users } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { useBuyResource } from '@/api/mutation/buyResource';
+import { Route, useNavigate } from 'react-router-dom';
+import { RoutePaths } from '@/router/Routes.types';
 
 interface PackageProps {
+  id: number;
   author: {
     name: string;
     avatarUrl: string;
   };
   title: string;
   lastUpdated: string;
-  rating: number;
+  rating: number | string;
   downloads: number;
   description: string;
   fileComposition: {
@@ -24,6 +29,7 @@ interface PackageProps {
 }
 
 export default function AlternativeMaterialTile({
+  id,
   author,
   title,
   lastUpdated,
@@ -35,8 +41,17 @@ export default function AlternativeMaterialTile({
 
   const handleBuy = () => {
     // Implement buy functionality here
+    buyResource({ learningResourceId: id });
     console.log('Package purchased!');
   };
+  const { mutate: buyResource, isError, isSuccess, isPending } = useBuyResource();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate('/test');
+    }
+  }, [isSuccess])
 
   return (
     <Card className="w-full max-w-md">
@@ -63,7 +78,7 @@ export default function AlternativeMaterialTile({
           </div>
 
           <Badge variant="secondary" className="text-green-700 text-sm px-2 py-1">
-            {rating.toFixed(1)} <Star className="w-3 h-3 ml-1 inline" />
+            {typeof rating === 'number' ? rating.toFixed(1) : rating} <Star className="w-3 h-3 ml-1 inline" />
           </Badge>
         </div>
       </CardHeader>
