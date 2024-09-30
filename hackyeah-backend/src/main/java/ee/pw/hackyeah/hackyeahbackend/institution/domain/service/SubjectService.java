@@ -5,10 +5,9 @@ import ee.pw.hackyeah.hackyeahbackend.institution.domain.Subject;
 import ee.pw.hackyeah.hackyeahbackend.institution.domain.repository.CourseRepository;
 import ee.pw.hackyeah.hackyeahbackend.institution.domain.repository.SubjectRepository;
 import jakarta.transaction.Transactional;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,16 +22,11 @@ public class SubjectService {
         String subjectName
     ) {
         Course course;
-        Optional<Course> courseOptional = courseRepository
-            .findById(courseId);
+        Optional<Course> courseOptional = courseRepository.findById(courseId);
 
-        if(courseOptional.isEmpty()) {
-            course = courseRepository.save(
-                Course
-                    .builder()
-                    .id(courseId)
-                    .build()
-            );
+        if (courseOptional.isEmpty()) {
+            course =
+                courseRepository.save(Course.builder().id(courseId).build());
         } else {
             course = courseOptional.get();
         }

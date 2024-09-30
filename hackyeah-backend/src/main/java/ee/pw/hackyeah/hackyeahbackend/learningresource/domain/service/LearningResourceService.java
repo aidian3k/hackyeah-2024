@@ -16,7 +16,7 @@ import ee.pw.hackyeah.hackyeahbackend.review.domain.service.ReviewService;
 import ee.pw.hackyeah.hackyeahbackend.user.domain.User;
 import ee.pw.hackyeah.hackyeahbackend.user.domain.UserService;
 import jakarta.transaction.Transactional;
-
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashSet;
@@ -48,32 +48,49 @@ public class LearningResourceService {
             .stream()
             .map(learningResource -> {
                 Set<Media> media = learningResource.getMedia();
-                Map<MediaType, List<String>> mediaTypeStringMap = new EnumMap<>(MediaType.class);
+                Map<MediaType, List<String>> mediaTypeStringMap = new EnumMap<>(
+                    MediaType.class
+                );
                 media.forEach(medium -> {
                     mediaTypeStringMap
-                            .computeIfAbsent(medium.getMediaType(), k -> new ArrayList<>())
-                            .add(mediaService.getDownloadMediaUrl(medium));
+                        .computeIfAbsent(
+                            medium.getMediaType(),
+                            k -> new ArrayList<>()
+                        )
+                        .add(mediaService.getDownloadMediaUrl(medium));
                 });
 
                 return LearningResourceBoughtDTO
-                        .builder()
-                        .id(learningResource.getId())
-                        .title(learningResource.getTitle())
-                        .createdAt(learningResource.getCreationDate())
-                        .description(learningResource.getDescription())
-                        .pdfMediaResources(
-                                mediaTypeStringMap.getOrDefault(MediaType.PDF, List.of())
+                    .builder()
+                    .id(learningResource.getId())
+                    .title(learningResource.getTitle())
+                    .createdAt(learningResource.getCreationDate())
+                    .description(learningResource.getDescription())
+                    .pdfMediaResources(
+                        mediaTypeStringMap.getOrDefault(
+                            MediaType.PDF,
+                            List.of()
                         )
-                        .imageMediaResources(
-                                mediaTypeStringMap.getOrDefault(MediaType.PHOTO, List.of())
+                    )
+                    .imageMediaResources(
+                        mediaTypeStringMap.getOrDefault(
+                            MediaType.PHOTO,
+                            List.of()
                         )
-                        .videoMediaResources(
-                                mediaTypeStringMap.getOrDefault(MediaType.VIDEO, List.of())
+                    )
+                    .videoMediaResources(
+                        mediaTypeStringMap.getOrDefault(
+                            MediaType.VIDEO,
+                            List.of()
                         )
-                        .otherMediaResources(
-                                mediaTypeStringMap.getOrDefault(MediaType.OTHER, List.of())
+                    )
+                    .otherMediaResources(
+                        mediaTypeStringMap.getOrDefault(
+                            MediaType.OTHER,
+                            List.of()
                         )
-                        .build();
+                    )
+                    .build();
             })
             .collect(Collectors.toSet());
     }
@@ -83,39 +100,55 @@ public class LearningResourceService {
         Long subjectId
     ) {
         return learningResourceRepository
-            .findLearningResourcesBySubjectId(
-                subjectId
-            ).stream().map(
-                        learningResource -> {
-                            Set<Media> media = learningResource.getMedia();
-                            Map<MediaType, List<String>> mediaTypeStringMap = new EnumMap<>(MediaType.class);
-                            media.forEach(medium -> {
-                                mediaTypeStringMap
-                                        .computeIfAbsent(medium.getMediaType(), k -> new ArrayList<>())
-                                        .add(mediaService.getDownloadMediaUrl(medium));
-                            });
+            .findLearningResourcesBySubjectId(subjectId)
+            .stream()
+            .map(learningResource -> {
+                Set<Media> media = learningResource.getMedia();
+                Map<MediaType, List<String>> mediaTypeStringMap = new EnumMap<>(
+                    MediaType.class
+                );
+                media.forEach(medium -> {
+                    mediaTypeStringMap
+                        .computeIfAbsent(
+                            medium.getMediaType(),
+                            k -> new ArrayList<>()
+                        )
+                        .add(mediaService.getDownloadMediaUrl(medium));
+                });
 
-                            return LearningResourceBoughtDTO
-                                    .builder()
-                                    .id(learningResource.getId())
-                                    .title(learningResource.getTitle())
-                                    .createdAt(learningResource.getCreationDate())
-                                    .description(learningResource.getDescription())
-                                    .pdfMediaResources(
-                                            mediaTypeStringMap.getOrDefault(MediaType.PDF, List.of())
-                                    )
-                                    .imageMediaResources(
-                                            mediaTypeStringMap.getOrDefault(MediaType.PHOTO, List.of())
-                                    )
-                                    .videoMediaResources(
-                                            mediaTypeStringMap.getOrDefault(MediaType.VIDEO, List.of())
-                                    )
-                                    .otherMediaResources(
-                                            mediaTypeStringMap.getOrDefault(MediaType.OTHER, List.of())
-                                    )
-                                    .build();
-                        }
-                ).collect(Collectors.toSet());
+                return LearningResourceBoughtDTO
+                    .builder()
+                    .id(learningResource.getId())
+                    .title(learningResource.getTitle())
+                    .createdAt(learningResource.getCreationDate())
+                    .description(learningResource.getDescription())
+                    .pdfMediaResources(
+                        mediaTypeStringMap.getOrDefault(
+                            MediaType.PDF,
+                            List.of()
+                        )
+                    )
+                    .imageMediaResources(
+                        mediaTypeStringMap.getOrDefault(
+                            MediaType.PHOTO,
+                            List.of()
+                        )
+                    )
+                    .videoMediaResources(
+                        mediaTypeStringMap.getOrDefault(
+                            MediaType.VIDEO,
+                            List.of()
+                        )
+                    )
+                    .otherMediaResources(
+                        mediaTypeStringMap.getOrDefault(
+                            MediaType.OTHER,
+                            List.of()
+                        )
+                    )
+                    .build();
+            })
+            .collect(Collectors.toSet());
     }
 
     @Transactional
@@ -137,6 +170,7 @@ public class LearningResourceService {
             learningResourceCreationDTO.subjectName()
         );
         learningResource.setSubject(subject);
+        learningResource.setCreationDate(LocalDateTime.now());
         LearningResource savedLearningResource =
             learningResourceRepository.save(learningResource);
 
@@ -153,7 +187,9 @@ public class LearningResourceService {
             mediaService.saveAllMedia(learningResourceMedia)
         );
         learningResource.setMedia(savedMedia);
-        Map<MediaType, List<String>> mediaTypeStringMap = new EnumMap<>(MediaType.class);
+        Map<MediaType, List<String>> mediaTypeStringMap = new EnumMap<>(
+            MediaType.class
+        );
 
         savedMedia.forEach(media -> {
             mediaTypeStringMap
@@ -161,16 +197,15 @@ public class LearningResourceService {
                 .add(mediaService.getDownloadMediaUrl(media));
         });
 
-
         return LearningResourceBoughtDTO
             .builder()
             .id(savedLearningResource.getId())
             .title(savedLearningResource.getTitle())
             .description(savedLearningResource.getDescription())
-                .imageMediaResources(mediaTypeStringMap.get(MediaType.PHOTO))
-                .pdfMediaResources(mediaTypeStringMap.get(MediaType.PDF))
-                .videoMediaResources(mediaTypeStringMap.get(MediaType.VIDEO))
-                .otherMediaResources(mediaTypeStringMap.get(MediaType.OTHER))
+            .imageMediaResources(mediaTypeStringMap.get(MediaType.PHOTO))
+            .pdfMediaResources(mediaTypeStringMap.get(MediaType.PDF))
+            .videoMediaResources(mediaTypeStringMap.get(MediaType.VIDEO))
+            .otherMediaResources(mediaTypeStringMap.get(MediaType.OTHER))
             .build();
     }
 
@@ -188,45 +223,57 @@ public class LearningResourceService {
             .stream()
             .map(learningResource -> {
                 Set<Media> media = learningResource.getMedia();
-                Map<MediaType, List<String>> mediaTypeStringMap = new EnumMap<>(MediaType.class);
+                Map<MediaType, List<String>> mediaTypeStringMap = new EnumMap<>(
+                    MediaType.class
+                );
                 media.forEach(medium -> {
                     mediaTypeStringMap
-                            .computeIfAbsent(medium.getMediaType(), k -> new ArrayList<>())
-                            .add(mediaService.getDownloadMediaUrl(medium));
+                        .computeIfAbsent(
+                            medium.getMediaType(),
+                            k -> new ArrayList<>()
+                        )
+                        .add(mediaService.getDownloadMediaUrl(medium));
                 });
 
-                        return LearningResourceFreeDTO
-                                .builder()
-                                .id(learningResource.getId())
-                                .title(learningResource.getTitle())
-                                .reviewDTO(
-                                        Optional
-                                                .ofNullable(
-                                                        reviewService.getReviewsByLearningId(
-                                                                learningResource.getId()
-                                                        )
-                                                )
-                                                .filter(reviews -> !reviews.isEmpty())
-                                                .map(review -> review.get(0))
-                                                .orElse(null)
+                return LearningResourceFreeDTO
+                    .builder()
+                    .id(learningResource.getId())
+                    .title(learningResource.getTitle())
+                    .reviewDTO(
+                        Optional
+                            .ofNullable(
+                                reviewService.getReviewsByLearningId(
+                                    learningResource.getId()
                                 )
-                                .createdAt(learningResource.getCreationDate())
-                                .description(learningResource.getDescription())
-                                .numberOfPdfs(
-                                        mediaTypeStringMap.getOrDefault(MediaType.PDF, List.of()).size()
-                                )
-                                .numberOfPhotos(
-                                        mediaTypeStringMap.getOrDefault(MediaType.PHOTO, List.of()).size()
-                                )
-                                .numberOfVideos(
-                                        mediaTypeStringMap.getOrDefault(MediaType.VIDEO, List.of()).size()
-                                )
-                                .otherMaterials(
-                                        mediaTypeStringMap.getOrDefault(MediaType.OTHER, List.of()).size()
-                                )
-                                .build();
-                    }
-            )
+                            )
+                            .filter(reviews -> !reviews.isEmpty())
+                            .map(review -> review.get(0))
+                            .orElse(null)
+                    )
+                    .createdAt(learningResource.getCreationDate())
+                    .description(learningResource.getDescription())
+                    .numberOfPdfs(
+                        mediaTypeStringMap
+                            .getOrDefault(MediaType.PDF, List.of())
+                            .size()
+                    )
+                    .numberOfPhotos(
+                        mediaTypeStringMap
+                            .getOrDefault(MediaType.PHOTO, List.of())
+                            .size()
+                    )
+                    .numberOfVideos(
+                        mediaTypeStringMap
+                            .getOrDefault(MediaType.VIDEO, List.of())
+                            .size()
+                    )
+                    .otherMaterials(
+                        mediaTypeStringMap
+                            .getOrDefault(MediaType.OTHER, List.of())
+                            .size()
+                    )
+                    .build();
+            })
             .collect(Collectors.toSet());
     }
 
@@ -236,19 +283,18 @@ public class LearningResourceService {
     ) {
         final User user = userService.getCurrentUser();
 
-        if(user.getTokens() <= 0) {
+        if (user.getTokens() <= 0) {
             throw new IllegalStateException("User has no tokens");
         }
 
         final LearningResource learningResource = learningResourceRepository
             .findById(learningResourceId.learningResourceId())
-            .orElseThrow(
-                () ->
-                    new IllegalStateException(
-                        "Learning resource with id " +
-                        learningResourceId.learningResourceId() +
-                        " not found"
-                    )
+            .orElseThrow(() ->
+                new IllegalStateException(
+                    "Learning resource with id " +
+                    learningResourceId.learningResourceId() +
+                    " not found"
+                )
             );
         final User author = learningResource.getAuthor();
 

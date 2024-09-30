@@ -32,7 +32,10 @@ import lombok.ToString;
 public class Subject {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subjects_seq")
+    @GeneratedValue(
+        strategy = GenerationType.SEQUENCE,
+        generator = "subjects_seq"
+    )
     @SequenceGenerator(name = "subjects_seq", allocationSize = 1)
     private Long id;
 

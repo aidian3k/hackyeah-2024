@@ -34,7 +34,7 @@ public class UserService {
             .builder()
             .firstName(userRegistrationInput.firstName())
             .email(userRegistrationInput.email())
-                .tokens(1L)
+            .tokens(1L)
             .lastName(userRegistrationInput.lastName())
             .nickName(userRegistrationInput.nickName())
             .password(passwordEncoder.encode(userRegistrationInput.password()))
@@ -64,10 +64,14 @@ public class UserService {
     }
 
     public User getUserByEmail(String email) {
-        return userRepository.findByEmail(email).orElseThrow(() -> GenericAppException.of(
-            "User with id " + email + " not found",
-            new IllegalArgumentException(),
-            HttpStatus.NOT_FOUND
-        ));
+        return userRepository
+            .findByEmail(email)
+            .orElseThrow(() ->
+                GenericAppException.of(
+                    "User with id " + email + " not found",
+                    new IllegalArgumentException(),
+                    HttpStatus.NOT_FOUND
+                )
+            );
     }
 }

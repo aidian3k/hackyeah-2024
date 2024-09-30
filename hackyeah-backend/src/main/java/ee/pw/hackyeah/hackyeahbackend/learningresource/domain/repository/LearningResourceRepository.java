@@ -9,12 +9,13 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LearningResourceRepository
     extends JpaRepository<LearningResource, Long> {
-
-    @Query("select lr from LearningResource lr" +
-            " where lr.subject.name like %:subjectName%" +
-            " and lr.subject.course.id = :courseId " +
-            "and lr.subject.course.faculty.id = :unitId " +
-            "and lr.subject.course.faculty.institution.id = :institutionId")
+    @Query(
+        "select lr from LearningResource lr" +
+        " where lr.subject.name like %:subjectName%" +
+        " and lr.subject.course.id = :courseId " +
+        "and lr.subject.course.faculty.id = :unitId " +
+        "and lr.subject.course.faculty.institution.id = :institutionId"
+    )
     Set<LearningResource> findLearningResourcesBySubjectNameAndCourseIdAndInstitutionIdAndUnitId(
         String subjectName,
         String courseId,
@@ -22,7 +23,9 @@ public interface LearningResourceRepository
         String unitId
     );
 
-    @Query("select lr from LearningResource lr" +
-            " where lr.subject.id = :subjectId")
+    @Query(
+        "select lr from LearningResource lr" +
+        " where lr.subject.id = :subjectId"
+    )
     Set<LearningResource> findLearningResourcesBySubjectId(Long subjectId);
 }

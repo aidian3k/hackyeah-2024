@@ -8,7 +8,6 @@ import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import java.net.Socket;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -42,31 +41,30 @@ class AmazonConfiguration {
     @Bean
     @Profile({ "local" })
     public AmazonS3 amazonS3LocalService() {
+        log.debug("Running amazonS3 mock from docker-image");
 
-            log.debug("Running amazonS3 mock from docker-image");
-
-            return AmazonS3ClientBuilder
-                    .standard()
-                .withCredentials(
-                    new AWSCredentialsProvider() {
-                        @Override
-                        public AWSCredentials getCredentials() {
-                            return new BasicAWSCredentials("root", "root");
-                        }
-
-                        @Override
-                        public void refresh() {
-                            // empty
-                        }
+        return AmazonS3ClientBuilder
+            .standard()
+            .withCredentials(
+                new AWSCredentialsProvider() {
+                    @Override
+                    public AWSCredentials getCredentials() {
+                        return new BasicAWSCredentials("root", "root");
                     }
+
+                    @Override
+                    public void refresh() {
+                        // empty
+                    }
+                }
+            )
+            .withEndpointConfiguration(
+                new AwsClientBuilder.EndpointConfiguration(
+                    amazonConfigurationProperties.getEndpoint(),
+                    Regions.EU_CENTRAL_1.getName()
                 )
-                .withEndpointConfiguration(
-                    new AwsClientBuilder.EndpointConfiguration(
-                        amazonConfigurationProperties.getEndpoint(),
-                        Regions.EU_CENTRAL_1.getName()
-                    )
-                )
-                    .withPathStyleAccessEnabled(true)
-                .build();
+            )
+            .withPathStyleAccessEnabled(true)
+            .build();
     }
 }

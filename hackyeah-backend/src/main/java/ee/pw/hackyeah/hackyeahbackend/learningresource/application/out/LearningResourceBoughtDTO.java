@@ -1,9 +1,8 @@
 package ee.pw.hackyeah.hackyeahbackend.learningresource.application.out;
 
-import lombok.Builder;
-
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.Builder;
 
 @Builder
 public record LearningResourceBoughtDTO(
